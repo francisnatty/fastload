@@ -17,7 +17,7 @@ class _AirtimePageState extends State<AirtimePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //  AirtimeAPI.purchaseMtnAirtime();
+    //AirtimeAPI.purchaseMtnAirtime();
   }
 
   @override
@@ -36,29 +36,31 @@ class _AirtimePageState extends State<AirtimePage> {
             'Buy Airtime',
             style: TextStyle(fontWeight: FontWeight.bold),
           )),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          Row(
-            children: [
-              NetworkPopUp(),
-              SizedBox(
-                width: 3,
-              ),
-              Expanded(
-                  child: TextField(
-                controller: phoneNumController,
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
-              ))
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          PriceList()
-        ]),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            Row(
+              children: [
+                NetworkPopUp(),
+                SizedBox(
+                  width: 3,
+                ),
+                Expanded(
+                    child: TextField(
+                  controller: phoneNumController,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ))
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            PriceList()
+          ]),
+        ),
       ),
     );
   }

@@ -24,7 +24,8 @@ class _PriceListState extends State<PriceList> {
     return Container(
       height: screenHeight * 0.5,
       width: screenWidth,
-      decoration: BoxDecoration(color: Colors.black87),
+      decoration: BoxDecoration(
+          color: Colors.black87, borderRadius: BorderRadius.circular(20)),
       child: Center(
         child: Wrap(
           spacing: 10,
@@ -42,8 +43,7 @@ class _PriceListState extends State<PriceList> {
       height: height * 0.15,
       width: width / 4,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.3),
-      ),
+          color: Colors.black87, borderRadius: BorderRadius.circular(20)),
       child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(

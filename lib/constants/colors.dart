@@ -5,6 +5,7 @@ const white = Color(0xFFFFFFFF);
 const primaryColor = Color(0xFFCC5500);
 Color black = Colors.black;
 Color lightBlack = Colors.black87;
+Color grey = Colors.grey;
 const textStyle = TextStyle(color: white, fontSize: 17);
 const balTextStyle = TextStyle(
     color: white,

@@ -23,6 +23,7 @@ class AirtimeAPI {
             'phone': 08011111111,
           }),
           headers: {
+            'Content-Type': 'application/json',
             'api-key': APIKey,
             'secret-key': secretKey,
           });

@@ -35,8 +35,8 @@ class _NetworkPopUpState extends State<NetworkPopUp> {
     return Row(
       children: [
         SizedBox(
-          height: 50,
-          width: 50,
+          height: 40,
+          width: 40,
           child: CircleAvatar(backgroundImage: Image.asset(initialImage).image),
         ),
         PopupMenuButton<PopupMenuItemModel>(
