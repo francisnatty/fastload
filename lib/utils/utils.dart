@@ -5,4 +5,10 @@ class Utils {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(content)));
   }
+  //Navigate to another screen
+
+  static Navigate(BuildContext context, Widget newScreen) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => newScreen));
+  }
 }

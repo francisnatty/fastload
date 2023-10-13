@@ -1,3 +1,4 @@
+import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/variables.dart';
@@ -157,11 +158,11 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  bills('Airtime', Icons.air),
-                  bills('Data', Icons.data_array),
-                  bills('Electricity', Icons.electric_bolt),
-                  bills('WAEC', Icons.cast_for_education),
-                  bills('Cable Tv', Icons.cast_connected),
+                  bills('Airtime', Icons.air, AirtimePage()),
+                  // bills('Data', Icons.data_array),
+                  // bills('Electricity', Icons.electric_bolt),
+                  // bills('WAEC', Icons.cast_for_education),
+                  // bills('Cable Tv', Icons.cast_connected),
                 ],
               ),
               const Divider(
@@ -192,7 +193,8 @@ class _HomePageState extends State<HomePage> {
                     'Refer and Earn',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: const Text('Refer your friends and earn cash prices'),
+                  subtitle:
+                      const Text('Refer your friends and earn cash prices'),
                 ),
               ),
               const SizedBox(
@@ -206,14 +208,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column bills(String title, IconData icon) {
+  Column bills(String title, IconData icon, Widget newScreen) {
     return Column(
       children: [
         Container(
-          decoration:
-              const BoxDecoration(color: Colors.black87, shape: BoxShape.circle),
+          decoration: const BoxDecoration(
+              color: Colors.black87, shape: BoxShape.circle),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Utils.Navigate(context, newScreen);
+            },
             icon: Icon(
               icon,
               color: white,

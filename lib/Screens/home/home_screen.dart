@@ -1,5 +1,6 @@
 import 'package:fastload/Screens/home/home.dart';
 import 'package:fastload/constants/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -14,14 +15,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> screens = [
-    const HomePage(),
-    const Center(
+    HomePage(),
+    Center(
       child: Text('Second screen'),
     ),
-    const Center(
+    Center(
       child: Text('Third screen'),
     ),
-    const Center(
+    Center(
       child: Text('Fourth screen'),
     ),
   ];
@@ -39,20 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: [
             SalomonBottomBarItem(
-                icon: const Icon(Iconsax.home),
-                title: const Text('Home'),
+                icon: Icon(Iconsax.home),
+                title: Text('Home'),
                 selectedColor: primaryColor),
             SalomonBottomBarItem(
-                icon: const Icon(Iconsax.wallet),
-                title: const Text('Home'),
+                icon: Icon(Iconsax.wallet),
+                title: Text('Home'),
                 selectedColor: primaryColor),
             SalomonBottomBarItem(
-                icon: const Icon(Iconsax.home),
-                title: const Text('Home'),
+                icon: Icon(Iconsax.home),
+                title: Text('Home'),
                 selectedColor: primaryColor),
             SalomonBottomBarItem(
-                icon: const Icon(Iconsax.home),
-                title: const Text('Home'),
+                icon: Icon(Iconsax.home),
+                title: Text('Home'),
                 selectedColor: primaryColor)
           ],
         ));
