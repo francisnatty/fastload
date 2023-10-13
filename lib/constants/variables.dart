@@ -1,0 +1,1 @@
+const fontName = 'Montserrat';
