@@ -1,5 +1,7 @@
 import 'package:fastload/Screens/home/home.dart';
+import 'package:fastload/Screens/settings/settings.dart';
 import 'package:fastload/constants/colors.dart';
+import 'package:fastload/pin_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -15,16 +17,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> screens = [
-    HomePage(),
-    Center(
-      child: Text('Second screen'),
-    ),
-    Center(
+    const HomePage(),
+    const PinScreen(),
+    const Center(
       child: Text('Third screen'),
     ),
-    Center(
-      child: Text('Fourth screen'),
-    ),
+    const SettingsPage(),
   ];
 
   @override
@@ -40,20 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: [
             SalomonBottomBarItem(
-                icon: Icon(Iconsax.home),
-                title: Text('Home'),
+                icon: const Icon(Iconsax.home),
+                title: const Text('Home'),
                 selectedColor: primaryColor),
             SalomonBottomBarItem(
-                icon: Icon(Iconsax.wallet),
-                title: Text('Home'),
+                icon: const Icon(Iconsax.wallet4),
+                title: const Text('Home'),
                 selectedColor: primaryColor),
             SalomonBottomBarItem(
-                icon: Icon(Iconsax.home),
-                title: Text('Home'),
+                icon: const Icon(Iconsax.home),
+                title: const Text('Home'),
                 selectedColor: primaryColor),
             SalomonBottomBarItem(
-                icon: Icon(Iconsax.home),
-                title: Text('Home'),
+                icon: const Icon(Iconsax.setting),
+                title: const Text('Home'),
                 selectedColor: primaryColor)
           ],
         ));

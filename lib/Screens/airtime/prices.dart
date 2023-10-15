@@ -22,33 +22,59 @@ class _PriceListState extends State<PriceList> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      height: screenHeight * 0.5,
+      height: screenHeight * 0.3,
       width: screenWidth,
       decoration: BoxDecoration(
-          color: Colors.black87, borderRadius: BorderRadius.circular(20)),
-      child: Center(
-        child: Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: prices.map((e) {
-            return priceDesign(e, screenHeight, screenWidth);
-          }).toList(),
-        ),
+          // gradient: RadialGradient(
+          //     tileMode: TileMode.mirror,
+          //     radius: 0.3,
+          //     colors: [primaryColor, black]),
+          // color: Colors.black87,
+          borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          const Divider(
+            color: primaryColor,
+          ),
+          Text(
+            'Choose Amount',
+            style: TextStyle(color: black, fontWeight: FontWeight.w700),
+          ),
+          const Divider(
+            color: primaryColor,
+          ),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: prices.map((e) {
+              return priceDesign(e, screenHeight, screenWidth);
+            }).toList(),
+          ),
+          const Spacer(),
+        ],
       ),
     );
   }
 
   Container priceDesign(int price, double height, double width) {
     return Container(
-      height: height * 0.15,
-      width: width / 4,
+      height: height * 0.10,
+      width: width / 5,
       decoration: BoxDecoration(
-          color: Colors.black87, borderRadius: BorderRadius.circular(20)),
+          color: Colors.black87,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(color: primaryColor, blurRadius: 2, offset: Offset(2, 4)),
+          ]),
       child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
           'N${price.toString()}',
-          style: TextStyle(color: white),
+          style: const TextStyle(color: white, fontWeight: FontWeight.bold),
         )
       ])),
     );

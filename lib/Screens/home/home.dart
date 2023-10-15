@@ -1,6 +1,7 @@
 import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
 import 'package:fastload/constants/colors.dart';
+import 'package:fastload/constants/image.dart';
 import 'package:fastload/constants/variables.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,11 @@ class _HomePageState extends State<HomePage> {
   String acctNumber = '6173624154';
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
     double screenwidth = MediaQuery.of(context).size.width;
@@ -32,7 +38,12 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 children: [
-                  const SizedBox(height: 60, width: 60, child: CircleAvatar()),
+                  SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: CircleAvatar(
+                        backgroundImage: Image.asset(Images.airtel).image,
+                      )),
                   SizedBox(
                     width: screenwidth * 0.03,
                   ),
@@ -50,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 width: screenwidth,
-                height: screenheight * 0.20,
+                height: screenheight * 0.23,
                 padding: const EdgeInsets.fromLTRB(15, 5, 10, 15),
                 decoration: BoxDecoration(
                   color: lightBlack,
@@ -76,6 +87,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IconButton(
                                 onPressed: () {
+                                  Utils().displayDialog(
+                                      context,
+                                      'Your purchase of N500 worth of airtime was sucessful',
+                                      alertType.fail);
                                   setState(() {
                                     isVisible = !isVisible;
                                   });
@@ -83,14 +98,23 @@ class _HomePageState extends State<HomePage> {
                                 icon: Icon(
                                   isVisible ? Iconsax.eye : Iconsax.eye_slash,
                                   color: white,
-                                ))
+                                )),
+                            const Spacer(),
+                            SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    Image.asset(Images.mobile).image,
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
                           height: screenheight * 0.001,
                         ),
                         Text(
-                          isVisible ? '300000000' : '*****',
+                          isVisible ? 'N300000000' : '*****',
                           style: balTextStyle,
                         ),
                         Row(
@@ -158,11 +182,11 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  bills('Airtime', Icons.air, AirtimePage()),
-                  // bills('Data', Icons.data_array),
-                  // bills('Electricity', Icons.electric_bolt),
-                  // bills('WAEC', Icons.cast_for_education),
-                  // bills('Cable Tv', Icons.cast_connected),
+                  bills('Airtime', Icons.air, const AirtimePage()),
+                  bills('Data', Icons.data_array, const AirtimePage()),
+                  bills('Electricity', Icons.electric_bolt, const AirtimePage()),
+                  bills('WAEC', Icons.cast_for_education, const AirtimePage()),
+                  bills('Cable Tv', Icons.cast_connected, const AirtimePage()),
                 ],
               ),
               const Divider(

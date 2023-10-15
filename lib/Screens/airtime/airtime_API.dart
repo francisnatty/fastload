@@ -34,7 +34,7 @@ class AirtimeAPI {
         print(res.body);
       }
     } catch (e) {
-      print('error is ${e}');
+      print('error is $e');
     }
   }
 }

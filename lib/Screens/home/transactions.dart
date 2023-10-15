@@ -20,9 +20,19 @@ class Transactions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.max,
           children: [
-            const Text(
-              'Last Transactions',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            const Row(
+              children: [
+                Text(
+                  'Last Transactions',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
+                Spacer(),
+                Text(
+                  'See All',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.green),
+                )
+              ],
             ),
             const SizedBox(
               height: 7,

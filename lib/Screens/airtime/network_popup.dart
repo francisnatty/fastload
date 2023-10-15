@@ -1,5 +1,4 @@
 import 'package:fastload/Screens/airtime/model/popup_model.dart';
-import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:flutter/material.dart';
 
@@ -40,24 +39,34 @@ class _NetworkPopUpState extends State<NetworkPopUp> {
           child: CircleAvatar(backgroundImage: Image.asset(initialImage).image),
         ),
         PopupMenuButton<PopupMenuItemModel>(
-            icon: Icon(Icons.arrow_drop_down_circle_outlined),
-            onSelected: _onMenuItemSelected,
+            icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+            onSelected: (value) {},
+            initialValue:
+                PopupMenuItemModel(title: 'mtn', imagePath: Images.mtn),
             itemBuilder: (context) {
               return menuItems.map((e) {
                 return PopupMenuItem<PopupMenuItemModel>(
-                    child: Row(
-                  children: [
-                    SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: CircleAvatar(
-                          backgroundImage: Image.asset(e.imagePath).image,
-                        )),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(e.title)
-                  ],
+                    child: GestureDetector(
+                  onTap: () {
+                    print(e.title);
+                    initialImage = e.imagePath;
+                    setState(() {});
+                    Navigator.pop(context);
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: CircleAvatar(
+                            backgroundImage: Image.asset(e.imagePath).image,
+                          )),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(e.title)
+                    ],
+                  ),
                 ));
               }).toList();
             }),
