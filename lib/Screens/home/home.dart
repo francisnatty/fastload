@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                       height: 60,
                       width: 60,
                       child: CircleAvatar(
-                        backgroundImage: Image.asset(Images.airtel).image,
+                        backgroundImage: Image.asset(Images.userAvatar).image,
                       )),
                   SizedBox(
                     width: screenwidth * 0.03,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                               width: 40,
                               child: CircleAvatar(
                                 backgroundImage:
-                                    Image.asset(Images.mobile).image,
+                                    Image.asset(Images.naijaFlag).image,
                               ),
                             ),
                           ],
@@ -183,8 +183,9 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   bills('Airtime', Icons.air, const AirtimePage()),
-                  bills('Data', Icons.data_array, const AirtimePage()),
-                  bills('Electricity', Icons.electric_bolt, const AirtimePage()),
+                  bills('Data', Icons.wifi, const AirtimePage()),
+                  bills(
+                      'Electricity', Icons.electric_bolt, const AirtimePage()),
                   bills('WAEC', Icons.cast_for_education, const AirtimePage()),
                   bills('Cable Tv', Icons.cast_connected, const AirtimePage()),
                 ],

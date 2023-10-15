@@ -3,4 +3,6 @@ class Images {
   static String glo = 'assets/images/glo.png';
   static String airtel = 'assets/images/airtel.jpg';
   static String mobile = 'assets/images/9mobile.png';
+  static String naijaFlag = 'assets/images/naija.png';
+  static String userAvatar = 'assets/images/avartar.png';
 }

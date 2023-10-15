@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "906557285628",
+    "project_id": "fast-loadd",
+    "storage_bucket": "fast-loadd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906557285628:android:03a1cbd57c5c19a5c06379",
+        "android_client_info": {
+          "package_name": "com.example.fastload"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt3eOw-Jpn7T4T8aLGdnkUfnCM7cdabNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

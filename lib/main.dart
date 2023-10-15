@@ -1,10 +1,16 @@
 import 'package:fastload/Screens/home/home_screen.dart';
+import 'package:fastload/Screens/registration/signin.dart';
+import 'package:fastload/Screens/registration/signup.dart';
 import 'package:fastload/constants/variables.dart';
 import 'package:fastload/global/global_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
         fontFamily: fontName,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const SignIn(),
     );
   }
 }
