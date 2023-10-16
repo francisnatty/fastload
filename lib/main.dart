@@ -1,6 +1,8 @@
 import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/Screens/registration/signin.dart';
 import 'package:fastload/Screens/registration/signup.dart';
+import 'package:fastload/buyData/buy_data_api.dart';
+import 'package:fastload/buyData/buydata.dart';
 import 'package:fastload/constants/variables.dart';
 import 'package:fastload/global/global_functions.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         fontFamily: fontName,
         useMaterial3: true,
       ),
-      home: const SignIn(),
+      home: const HomeScreen(),
     );
   }
 }

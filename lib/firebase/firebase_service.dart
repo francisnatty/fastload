@@ -26,4 +26,20 @@ class FirebaseService {
       Utils.showSnackBar(context, '${e}');
     }
   }
+
+  static login(BuildContext context, String email, String password) async {
+    try {
+      final user = (await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: email, password: password))
+          .user;
+
+      if (user != null) {
+        print('login sucessful');
+      } else {}
+    } on SocketException catch (e) {
+      Utils.showSnackBar(context, 'little of no internet connection');
+    } catch (e) {
+      Utils.showSnackBar(context, '$e');
+    }
+  }
 }

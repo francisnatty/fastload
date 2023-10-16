@@ -1,5 +1,6 @@
 import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
+import 'package:fastload/buyData/buydata.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:fastload/constants/variables.dart';
@@ -183,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   bills('Airtime', Icons.air, const AirtimePage()),
-                  bills('Data', Icons.wifi, const AirtimePage()),
+                  bills('Data', Icons.wifi, const BuyData()),
                   bills(
                       'Electricity', Icons.electric_bolt, const AirtimePage()),
                   bills('WAEC', Icons.cast_for_education, const AirtimePage()),
