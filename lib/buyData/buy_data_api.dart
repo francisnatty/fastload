@@ -21,7 +21,6 @@ class DataAPI {
       final Map<String, dynamic> data = json.decode(response.body);
       return ServiceData.fromJson(data['content']);
     } catch (e) {
-      print(e);
       Utils.showSnackBar(context, '${e}');
       return null;
     }

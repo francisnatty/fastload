@@ -38,19 +38,19 @@ class _BuyDataState extends State<BuyData> {
                 return Expanded(
                   child: Row(
                     children: [
-                      Text(serviceData!.variations[index].amount),
+                      Text(serviceData.variations[index].amount),
                       SizedBox(
                         width: 10,
                       ),
-                      Text(serviceData!.variations[index].fixedPrice),
+                      Text(serviceData.variations[index].fixedPrice),
                       SizedBox(
                         width: 10,
                       ),
-                      Text(serviceData!.variations[index].code),
+                      Text(serviceData.variations[index].code),
                       SizedBox(
                         width: 10,
                       ),
-                      Text(serviceData!.variations[index].name),
+                      Text(serviceData.variations[index].name),
                     ],
                   ),
                 );
