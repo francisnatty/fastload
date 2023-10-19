@@ -12,7 +12,7 @@ class BuyData extends StatefulWidget {
 class _BuyDataState extends State<BuyData> {
   String textValue = '';
   String? dropdownValue;
-  List<ServiceVariation>? selectedItem;
+  ServiceVariation? selectedItem;
   List<String> dropdownItems = ['Option 1', 'Option 2', 'Option 3'];
 
   // List<DropdownMenuItem<ServiceVariation>> get dropDownItems{
@@ -46,21 +46,25 @@ class _BuyDataState extends State<BuyData> {
               final serviceData = snapshot.data;
               List<ServiceVariation> dataList = serviceData!.variations;
 
-              return Column(
-                children: [
-                  Text(serviceData.convienienceFee.toString()),
-                  // DropdownButton<List<ServiceVariation>>(
-                  //     value: selectedItem,
-                  //     items: dataList.map((e) {
-                  //       return Container();
-                  //     })
-
-                  //     onChanged: (List? newItem) {
-                  //       setState(() {
-                  //         // selectedItem = newItem;
-                  //       });
-                  //     })
-                ],
+              return Center(
+                child: Column(
+                  children: [
+                    Text(serviceData.convienienceFee.toString()),
+                    DropdownButton<ServiceVariation>(
+                        value: selectedItem,
+                        items: dataList.map((e) {
+                          return DropdownMenuItem<ServiceVariation>(
+                            value: e,
+                            child: Text(e.amount),
+                          );
+                        }).toList(),
+                        onChanged: (ServiceVariation? newItem) {
+                          setState(() {
+                            // selectedItem = newItem;
+                          });
+                        })
+                  ],
+                ),
               );
             }));
   }

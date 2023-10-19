@@ -22,7 +22,7 @@ class _PriceListState extends State<PriceList> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      height: screenHeight * 0.3,
+      height: screenHeight * 0.2,
       width: screenWidth,
       decoration: BoxDecoration(
           // gradient: RadialGradient(
@@ -34,16 +34,16 @@ class _PriceListState extends State<PriceList> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
-          const Divider(
-            color: primaryColor,
-          ),
-          Text(
-            'Choose Amount',
-            style: TextStyle(color: black, fontWeight: FontWeight.w700),
-          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // const Divider(
+          //   color: primaryColor,
+          // ),
+          // Text(
+          //   'Choose Amount',
+          //   style: TextStyle(color: black, fontWeight: FontWeight.w700),
+          // ),
           const Divider(
             color: primaryColor,
           ),
@@ -62,7 +62,7 @@ class _PriceListState extends State<PriceList> {
 
   Container priceDesign(int price, double height, double width) {
     return Container(
-      height: height * 0.10,
+      height: height * 0.07,
       width: width / 5,
       decoration: BoxDecoration(
           color: Colors.black87,
