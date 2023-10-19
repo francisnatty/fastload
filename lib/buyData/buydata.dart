@@ -49,17 +49,17 @@ class _BuyDataState extends State<BuyData> {
               return Column(
                 children: [
                   Text(serviceData.convienienceFee.toString()),
-                  DropdownButton<List<ServiceVariation>>(
-                      value: selectedItem,
-                      items: dataList
-                          .map<DropdownMenuItem<List<ServiceVariation>>>((e) {
-                        return DropdownMenuItem(child: Text(e.amount));
-                      }).toList(),
-                      onChanged: (List? newItem) {
-                        setState(() {
-                          // selectedItem = newItem;
-                        });
-                      })
+                  // DropdownButton<List<ServiceVariation>>(
+                  //     value: selectedItem,
+                  //     items: dataList.map((e) {
+                  //       return Container();
+                  //     })
+
+                  //     onChanged: (List? newItem) {
+                  //       setState(() {
+                  //         // selectedItem = newItem;
+                  //       });
+                  //     })
                 ],
               );
             }));
