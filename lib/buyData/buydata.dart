@@ -10,6 +10,14 @@ class BuyData extends StatefulWidget {
 }
 
 class _BuyDataState extends State<BuyData> {
+  String textValue = '';
+  String? dropdownValue;
+  List<ServiceVariation>? selectedItem;
+  List<String> dropdownItems = ['Option 1', 'Option 2', 'Option 3'];
+
+  // List<DropdownMenuItem<ServiceVariation>> get dropDownItems{
+  //   List<>
+  // }
   @override
   void initState() {
     // TODO: implement initState
@@ -20,45 +28,40 @@ class _BuyDataState extends State<BuyData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<ServiceData?>(
-        future: DataAPI().mtnData(context),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          } else {
-            final serviceData = snapshot.data;
-
-            return ListView.builder(
-              itemCount: serviceData!.variations.length,
-              itemBuilder: (context, index) {
-                return Expanded(
-                  child: Row(
-                    children: [
-                      Text(serviceData.variations[index].amount),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(serviceData.variations[index].fixedPrice),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(serviceData.variations[index].code),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(serviceData.variations[index].name),
-                    ],
-                  ),
+        body: FutureBuilder<ServiceData?>(
+            future: DataAPI().mtnData(context),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
-            );
-          }
-        },
-      ),
-    );
+              } else if (snapshot != null) {
+                if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                }
+                // } else {
+                //   return Center(child: Text('check your internet connection'));
+                // }
+              }
+              final serviceData = snapshot.data;
+              List<ServiceVariation> dataList = serviceData!.variations;
+
+              return Column(
+                children: [
+                  Text(serviceData.convienienceFee.toString()),
+                  DropdownButton<List<ServiceVariation>>(
+                      value: selectedItem,
+                      items: dataList
+                          .map<DropdownMenuItem<List<ServiceVariation>>>((e) {
+                        return DropdownMenuItem(child: Text(e.amount));
+                      }).toList(),
+                      onChanged: (List? newItem) {
+                        setState(() {
+                          // selectedItem = newItem;
+                        });
+                      })
+                ],
+              );
+            }));
   }
 }

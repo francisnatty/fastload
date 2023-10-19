@@ -60,7 +60,8 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: screenheight * 0.02,
               ),
-              Container(
+              AnimatedContainer(
+                duration: Duration(seconds: 10),
                 width: screenwidth,
                 height: screenheight * 0.23,
                 padding: const EdgeInsets.fromLTRB(15, 5, 10, 15),

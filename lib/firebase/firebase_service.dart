@@ -17,13 +17,13 @@ class FirebaseService {
       //   print('failed');
       // }
     } on FirebaseAuthException catch (e) {
-      print('${e}');
-      Utils.showSnackBar(context, '${e}');
-    } on SocketException catch (e) {
+      print('$e');
+      Utils.showSnackBar(context, '$e');
+    } on SocketException {
       Utils.showSnackBar(context, 'Little or no internet connection');
     } catch (e) {
       print('$e');
-      Utils.showSnackBar(context, '${e}');
+      Utils.showSnackBar(context, '$e');
     }
   }
 
@@ -36,7 +36,7 @@ class FirebaseService {
       if (user != null) {
         print('login sucessful');
       } else {}
-    } on SocketException catch (e) {
+    } on SocketException {
       Utils.showSnackBar(context, 'little of no internet connection');
     } catch (e) {
       Utils.showSnackBar(context, '$e');

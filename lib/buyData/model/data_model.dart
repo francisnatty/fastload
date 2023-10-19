@@ -11,7 +11,6 @@ class ServiceVariation {
       required this.name});
 
   factory ServiceVariation.fromJson(Map<String, dynamic> json) {
-    print(json['variation_amount']);
     return ServiceVariation(
         amount: json['variation_amount'],
         code: json['variation_code'],

@@ -21,18 +21,31 @@ class DataAPI {
       final Map<String, dynamic> data = json.decode(response.body);
       return ServiceData.fromJson(data['content']);
     } catch (e) {
-      Utils.showSnackBar(context, '${e}');
+      Utils.showSnackBar(context, '$e');
       return null;
     }
   }
 
-  Future<void> buyData() async {
+  Future<void> buyData(BuildContext context) async {
     String baseUrl = 'https://sandbox.vtpass.com/api/pay';
 
-    final response = http.post(Uri.parse(baseUrl), headers: {
-      'Content-Type': 'application/json',
-      'api-key': APIKey,
-      'secret-key': secretKey,
-    });
+    try {
+      final response = await http.post(Uri.parse(baseUrl),
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': APIKey,
+            'secret-key': secretKey,
+          },
+          body: jsonEncode(<String, dynamic>{
+            'request_id': '',
+            'serviceId': '',
+            'billersCode': '',
+            'variation_code': '',
+            //'amount': '',
+          }));
+    } catch (e) {
+      print(e);
+      Utils.showSnackBar(context, '$e');
+    }
   }
 }

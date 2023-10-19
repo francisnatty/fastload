@@ -74,11 +74,11 @@ class _SignInState extends State<SignIn> {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide.none),
-                                contentPadding: EdgeInsets.only(left: 20),
+                                contentPadding: const EdgeInsets.only(left: 20),
                                 fillColor: grey.withOpacity(0.3),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             TextFormField(
@@ -102,7 +102,7 @@ class _SignInState extends State<SignIn> {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: BorderSide.none),
-                                contentPadding: EdgeInsets.only(left: 20),
+                                contentPadding: const EdgeInsets.only(left: 20),
                                 fillColor: grey.withOpacity(0.3),
                               ),
                             ),
