@@ -12,6 +12,7 @@ class AirtimePage extends StatefulWidget {
 
 class _AirtimePageState extends State<AirtimePage> {
   final _formKey = GlobalKey<FormState>();
+  bool _isHovered = false;
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController amtController = TextEditingController();
   @override
@@ -101,7 +102,7 @@ class _AirtimePageState extends State<AirtimePage> {
                               borderRadius: BorderRadius.circular(15),
                               borderSide: BorderSide.none),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(15),
                               borderSide: BorderSide.none)),
                     ),
                   )
@@ -136,39 +137,60 @@ class _AirtimePageState extends State<AirtimePage> {
                 height: 20,
               ),
               const PriceList(),
-              const Divider(
-                color: primaryColor,
-              ),
+              // const Divider(
+              //   color: primaryColor,
+              // ),
               const SizedBox(
                 height: 5,
               ),
-              Text(
-                'amount cannot be less than 50naira',
-                style: TextStyle(
-                    color: grey, fontWeight: FontWeight.w800, fontSize: 12),
-              ),
+
               const SizedBox(
                 height: 20,
               ),
               SizedBox(
                 width: width,
                 height: 45,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                    } else {}
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_) {
+                    setState(() {
+                      _isHovered = true;
+                    });
                   },
-                  style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(primaryColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0)))),
-                  child: const Text(
-                    'BUY',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  onHover: (event) {
+                    setState(() {
+                      _isHovered = true;
+                    });
+                  },
+                  onExit: (_) {
+                    setState(() {
+                      _isHovered = false;
+                    });
+                  },
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                      } else {}
+                    },
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(white),
+                        backgroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return Colors.black;
+                          }
+                          return primaryColor;
+                        }),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)))),
+                    child: const Text(
+                      'BUY',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),

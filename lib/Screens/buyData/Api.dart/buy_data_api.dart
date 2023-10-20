@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:fastload/buyData/model/data_model.dart';
+import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../global/global_variables.dart';
+import '../../../global/global_variables.dart';
 
 class DataAPI {
   Future<ServiceData?> mtnData(BuildContext context) async {

@@ -44,9 +44,9 @@ class _PriceListState extends State<PriceList> {
           //   'Choose Amount',
           //   style: TextStyle(color: black, fontWeight: FontWeight.w700),
           // ),
-          const Divider(
-            color: primaryColor,
-          ),
+          // const Divider(
+          //   color: primaryColor,
+          // ),
           Wrap(
             spacing: 10,
             runSpacing: 10,
