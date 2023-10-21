@@ -18,7 +18,7 @@ class MyTextField extends StatelessWidget {
       decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
-          contentPadding: EdgeInsets.all(15),
+          contentPadding: const EdgeInsets.all(15),
           filled: true,
           fillColor: grey.withOpacity(0.3),
           enabledBorder: OutlineInputBorder(

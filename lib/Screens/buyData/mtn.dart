@@ -1,8 +1,10 @@
+import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
 import 'package:fastload/Screens/buyData/Api.dart/buy_data_api.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MtnData extends StatefulWidget {
   const MtnData({super.key});
@@ -34,17 +36,13 @@ class _MtnDataState extends State<MtnData> {
             future: DataAPI().getMtnDataPlans(context),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (snapshot != null) {
-                if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                }
-                // } else {
-                //   return Center(child: Text('check your internet connection'));
-                // }
+              } else if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
               }
+
               final serviceData = snapshot.data;
               List<ServiceVariation> dataList = serviceData!.variations;
 
@@ -61,12 +59,12 @@ class _MtnDataState extends State<MtnData> {
                         return dataPakage(e.code, e.name);
                       }).toList(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     MyTextField(
                         controller: phoneController, hintText: 'Enter number'),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     SizedBox(
@@ -74,18 +72,17 @@ class _MtnDataState extends State<MtnData> {
                         height: MediaQuery.of(context).size.height * 0.07,
                         child: ElevatedButton(
                           onPressed: () {
-                            print(serviceData.serviceID);
+                            context
+                                .read<SuccessDialogBloc>()
+                                .makeApiCallAndShowDialog();
+                            // print(serviceData.serviceID);
 
-                            DataAPI().buyMtnData(context, serviceData.serviceID,
-                                'mtn-10mb-100', '08011111111', 08011111111);
-                            setState(() {
-                              isLoading = false;
-                            });
+                            // DataAPI().buyMtnData(context, serviceData.serviceID,
+                            //     'mtn-10mb-100', '08011111111', 08011111111);
+                            // setState(() {
+                            //   isLoading = false;
+                            // });
                           },
-                          child: Text(
-                            'Buy data',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
@@ -97,6 +94,10 @@ class _MtnDataState extends State<MtnData> {
                             backgroundColor:
                                 MaterialStateProperty.all<Color>(primaryColor),
                           ),
+                          child: const Text(
+                            'Buy data',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ))
                   ],
                 ),
@@ -107,7 +108,7 @@ class _MtnDataState extends State<MtnData> {
   Container dataPakage(String price, String dataSize) {
     List<String> parts = dataSize.split(' ');
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       height: 80,
       width: 80,
       decoration: BoxDecoration(
@@ -120,16 +121,17 @@ class _MtnDataState extends State<MtnData> {
         child: Column(children: [
           Expanded(
               child: Text(
-            '${parts[0]}',
+            parts[0],
             style: TextStyle(color: black, fontWeight: FontWeight.bold),
           )),
           Text(
-            '${parts[1]}',
-            style: TextStyle(color: primaryColor, fontWeight: FontWeight.w600),
+            parts[1],
+            style: const TextStyle(
+                color: primaryColor, fontWeight: FontWeight.w600),
           ),
           Text(
             '${parts[3]} ${parts[4]}',
-            style: TextStyle(color: primaryColor, fontSize: 12),
+            style: const TextStyle(color: primaryColor, fontSize: 12),
           )
         ]),
       ),

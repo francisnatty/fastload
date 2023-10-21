@@ -1,7 +1,6 @@
 import 'package:fastload/Screens/buyData/model/service_provider_model.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
-import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
 
 class SelectProvider extends StatefulWidget {
@@ -48,7 +47,7 @@ class _SelectProviderState extends State<SelectProvider> {
             selectprovider,
             style: TextStyle(fontWeight: FontWeight.bold, color: grey),
           ),
-          Spacer(),
+          const Spacer(),
           PopupMenuButton<ServiceProviderModel>(
               initialValue: ServiceProviderModel(
                   ServiceId: 'mtn-data',
@@ -71,7 +70,7 @@ class _SelectProviderState extends State<SelectProvider> {
                         CircleAvatar(
                           backgroundImage: Image.asset(e.asset).image,
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         Text(e.serviceName),
                       ],
                     ),

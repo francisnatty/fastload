@@ -47,7 +47,7 @@ class DataAPI {
             'secret-key': secretKey,
           },
           body: jsonEncode(<String, dynamic>{
-            'request_id': '${dateFormat}',
+            'request_id': dateFormat,
             'serviceID': serviceId,
             'billersCode': billersCode,
             'variation_code': variationCode,

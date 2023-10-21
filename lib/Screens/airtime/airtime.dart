@@ -56,20 +56,20 @@ class _AirtimePageState extends State<AirtimePage> {
               Material(
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey.withOpacity(0.2),
-                child: Row(children: [
+                child: const Row(children: [
                   Expanded(
                       child: TextField(
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(15),
                         hintText: 'Select Provider',
                         border: InputBorder.none),
                   )),
-                  const NetworkPopUp(),
+                  NetworkPopUp(),
                 ]),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(

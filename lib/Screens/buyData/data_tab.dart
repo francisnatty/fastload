@@ -2,7 +2,6 @@ import 'package:fastload/Screens/buyData/mtn.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class DataTab extends StatefulWidget {
   const DataTab({super.key});
@@ -26,7 +25,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Container(
@@ -37,14 +36,14 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                 child: TabBar(
                     indicatorSize: TabBarIndicatorSize.tab,
                     controller: controller,
-                    labelPadding: EdgeInsets.all(10),
+                    labelPadding: const EdgeInsets.all(10),
                     unselectedLabelColor: black,
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                    labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                     labelColor: Colors.white,
                     indicator: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(25.0)),
-                    tabs: [
+                    tabs: const [
                       Tab(
                         text: 'Mtn',
                       ),
@@ -61,10 +60,10 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
               ),
               Expanded(
                   child: TabBarView(controller: controller, children: [
-                MtnData(),
-                Container(child: Text('Grace')),
-                Container(child: Text('Eliz')),
-                Container(child: Text('Gbariel')),
+                const MtnData(),
+                Container(child: const Text('Grace')),
+                Container(child: const Text('Eliz')),
+                Container(child: const Text('Gbariel')),
               ]))
               // _tabSelection(context, controller),
             ],
@@ -110,14 +109,14 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                   ]),
             ),
           ),
-          Container(
+          SizedBox(
             height: double.infinity,
             child: Flexible(
               child: TabBarView(controller: controller, children: <Widget>[
-                Container(child: Text('Natty')),
-                Container(child: Text('Natty')),
-                Container(child: Text('Natty')),
-                Container(child: Text('Natty')),
+                Container(child: const Text('Natty')),
+                Container(child: const Text('Natty')),
+                Container(child: const Text('Natty')),
+                Container(child: const Text('Natty')),
               ]),
             ),
           )

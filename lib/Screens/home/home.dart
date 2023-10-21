@@ -1,7 +1,8 @@
+import 'package:fastload/Screens/Electricity/bloc/dailod.dart';
+import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
+import 'package:fastload/Screens/Electricity/eletricity.dart';
 import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
-import 'package:fastload/Screens/buyData/mtn.dart';
-import 'package:fastload/Screens/buyData/data.dart';
 import 'package:fastload/Screens/buyData/data_tab.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
@@ -9,6 +10,7 @@ import 'package:fastload/constants/variables.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 height: screenheight * 0.02,
               ),
               AnimatedContainer(
-                duration: Duration(seconds: 10),
+                duration: const Duration(seconds: 10),
                 width: screenwidth,
                 height: screenheight * 0.23,
                 padding: const EdgeInsets.fromLTRB(15, 5, 10, 15),
@@ -91,13 +93,13 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IconButton(
                                 onPressed: () {
-                                  Utils().displayDialog(
-                                      context,
-                                      'Your purchase of N500 worth of airtime was sucessful',
-                                      alertType.fail);
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
+//                                   Utils().displayDialog(
+//                                       context,
+//                                       'Your purchase of N500 worth of airtime was sucessful',
+//                                       alertType.fail);
+// /                                  setState(() {
+//                                     isVisible = !isVisible;
+//                                   });
                                 },
                                 icon: Icon(
                                   isVisible ? Iconsax.eye : Iconsax.eye_slash,
@@ -188,8 +190,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   bills('Airtime', Icons.air, const AirtimePage()),
                   bills('Data', Icons.wifi, const DataTab()),
-                  bills(
-                      'Electricity', Icons.electric_bolt, const AirtimePage()),
+                  bills('Electricity', Icons.electric_bolt,
+                      const ElectricityPage()),
                   bills('WAEC', Icons.cast_for_education, const AirtimePage()),
                   bills('Cable Tv', Icons.cast_connected, const AirtimePage()),
                 ],
