@@ -6,6 +6,8 @@ class Images {
   static String naijaFlag = 'assets/images/naija.png';
   static String userAvatar = 'assets/images/avartar.png';
 
+  static String electricity = 'assets/images/eletricityphoto.png';
+
   //electricity conpanies
   static String abuja = 'assets/images/abuja.webp';
   static String benin = 'assets/images/benin.jpg';

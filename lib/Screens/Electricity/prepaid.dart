@@ -31,10 +31,23 @@ class _PrepaidPageState extends State<PrepaidPage> {
         SizedBox(
           height: 20,
         ),
+        Center(
+          child: SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.asset(Images.electricity),
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
         Material(
           borderRadius: BorderRadius.circular(10),
           color: grey.withOpacity(0.3),
           child: Row(children: [
+            // CircleAvatar(
+            //   backgroundImage: Image.asset(Images.kaduna).image,
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -43,9 +56,8 @@ class _PrepaidPageState extends State<PrepaidPage> {
                     fontWeight: FontWeight.w700, color: Colors.grey[500]),
               ),
             ),
-            Spacer(),
             Padding(
-              padding: const EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 3),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton(
                     elevation: 0,
@@ -80,7 +92,7 @@ class _PrepaidPageState extends State<PrepaidPage> {
         ),
         MyTextField(controller: amtController, hintText: 'Amount'),
         SizedBox(
-          height: 80,
+          height: 30,
         ),
         SizedBox(
           height: 50,
