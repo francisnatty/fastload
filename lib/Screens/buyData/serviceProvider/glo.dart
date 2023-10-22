@@ -1,19 +1,17 @@
-import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
 import 'package:fastload/Screens/buyData/Api.dart/buy_data_api.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MtnData extends StatefulWidget {
-  const MtnData({super.key});
+class GloData extends StatefulWidget {
+  const GloData({super.key});
 
   @override
-  State<MtnData> createState() => _MtnDataState();
+  State<GloData> createState() => _GloDataState();
 }
 
-class _MtnDataState extends State<MtnData> {
+class _GloDataState extends State<GloData> {
   TextEditingController phoneController = TextEditingController();
   String textValue = '';
   String? dropdownValue;
@@ -25,7 +23,7 @@ class _MtnDataState extends State<MtnData> {
   @override
   void initState() {
     // TODO: implement initState
-    DataAPI().getMtnDataPlans(context);
+
     super.initState();
   }
 
@@ -33,14 +31,18 @@ class _MtnDataState extends State<MtnData> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder<ServiceData?>(
-            future: DataAPI().getMtnDataPlans(context),
+            future: DataAPI().getMtnDataPlans(context, 'glo-data'),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
+              } else if (snapshot != null) {
+                if (snapshot.hasError) {
+                  return Center(child: Text(snapshot.error.toString()));
+                }
+              } else {
+                return Center(child: Text('Poor Internet Connection'));
               }
 
               final serviceData = snapshot.data;
@@ -72,9 +74,6 @@ class _MtnDataState extends State<MtnData> {
                         height: MediaQuery.of(context).size.height * 0.07,
                         child: ElevatedButton(
                           onPressed: () {
-                            context
-                                .read<SuccessDialogBloc>()
-                                .makeApiCallAndShowDialog();
                             // print(serviceData.serviceID);
 
                             // DataAPI().buyMtnData(context, serviceData.serviceID,
@@ -106,7 +105,9 @@ class _MtnDataState extends State<MtnData> {
   }
 
   Container dataPakage(String price, String dataSize) {
+    print(dataSize);
     List<String> parts = dataSize.split(' ');
+    print(parts);
     return Container(
       padding: const EdgeInsets.all(8),
       height: 80,
@@ -121,16 +122,16 @@ class _MtnDataState extends State<MtnData> {
         child: Column(children: [
           Expanded(
               child: Text(
-            parts[0],
+            parts[2],
             style: TextStyle(color: black, fontWeight: FontWeight.bold),
           )),
           Text(
-            parts[1],
+            parts[5],
             style: const TextStyle(
                 color: primaryColor, fontWeight: FontWeight.w600),
           ),
           Text(
-            '${parts[3]} ${parts[4]}',
+            '${parts[7]} ${parts[8]}',
             style: const TextStyle(color: primaryColor, fontSize: 12),
           )
         ]),

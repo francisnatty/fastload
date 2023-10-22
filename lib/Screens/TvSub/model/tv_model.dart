@@ -1,12 +1,11 @@
 class TvModel {
   final String ServiceName;
   final String serviceId;
-  final String convinience_fee;
+
   final List<TvVariations> variations;
 
   const TvModel(
       {required this.ServiceName,
-      required this.convinience_fee,
       required this.serviceId,
       required this.variations});
 
@@ -15,8 +14,7 @@ class TvModel {
     List<TvVariations> variationList =
         variations.map((e) => TvVariations.fromJson(e)).toList();
     return TvModel(
-        ServiceName: json['serviceName'],
-        convinience_fee: json['convinience_fee'],
+        ServiceName: json['ServiceName'],
         serviceId: json['serviceID'],
         variations: variationList);
   }

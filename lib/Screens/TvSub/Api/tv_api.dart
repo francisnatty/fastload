@@ -15,8 +15,6 @@ class TvApi {
         'secret-key': publicKey
       });
       if (response.statusCode == 200) {
-        print(response.body);
-
         Map<String, dynamic> data = jsonDecode(response.body);
         return TvModel.fromJson(data['content']);
       }

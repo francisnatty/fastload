@@ -1,4 +1,7 @@
-import 'package:fastload/Screens/buyData/mtn.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/airtel.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/glo.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/mtn.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/ninemobile.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,12 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new_outlined),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           title: const Text(
             'Buy Data',
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
@@ -38,7 +47,8 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                     controller: controller,
                     labelPadding: const EdgeInsets.all(10),
                     unselectedLabelColor: black,
-                    labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    labelStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
                     labelColor: Colors.white,
                     indicator: BoxDecoration(
                         color: primaryColor,
@@ -61,9 +71,9 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
               Expanded(
                   child: TabBarView(controller: controller, children: [
                 const MtnData(),
-                Container(child: const Text('Grace')),
-                Container(child: const Text('Eliz')),
-                Container(child: const Text('Gbariel')),
+                const AirtelData(),
+                const GloData(),
+                const NineMobileData(),
               ]))
               // _tabSelection(context, controller),
             ],

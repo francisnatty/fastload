@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/utils/utils.dart';
@@ -14,9 +15,10 @@ class DataAPI {
     return formatter.format(DateTime.now());
   }
 
-  Future<ServiceData?> getMtnDataPlans(BuildContext context) async {
+  Future<ServiceData?> getMtnDataPlans(
+      BuildContext context, String serviceId) async {
     String baseUrl =
-        'https://sandbox.vtpass.com/api/service-variations?serviceID=mtn-data';
+        'https://sandbox.vtpass.com/api/service-variations?serviceID=$serviceId';
 
     try {
       final response = await http.get(Uri.parse(baseUrl), headers: {
@@ -26,6 +28,8 @@ class DataAPI {
       });
       final Map<String, dynamic> data = json.decode(response.body);
       return ServiceData.fromJson(data['content']);
+    } on SocketException catch (e) {
+      Utils.showSnackBar(context, 'Little or no Internet Connection');
     } catch (e) {
       Utils.showSnackBar(context, '$e');
       return null;

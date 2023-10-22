@@ -1,6 +1,7 @@
 import 'package:fastload/Screens/Electricity/bloc/dailod.dart';
 import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
 import 'package:fastload/Screens/Electricity/eletricity.dart';
+import 'package:fastload/Screens/TvSub/tv_sub.dart';
 import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
 import 'package:fastload/Screens/buyData/data_tab.dart';
@@ -193,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                   bills('Electricity', Icons.electric_bolt,
                       const ElectricityPage()),
                   bills('WAEC', Icons.cast_for_education, const AirtimePage()),
-                  bills('Cable Tv', Icons.cast_connected, const AirtimePage()),
+                  bills('Cable Tv', Icons.cast_connected, const TvSub()),
                 ],
               ),
               const Divider(
