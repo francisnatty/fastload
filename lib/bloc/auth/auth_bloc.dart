@@ -22,7 +22,10 @@ class AuthBloc extends Bloc<UserRegistrationEvent, UserRegsitationState> {
         if (user != null) {
         } else {}
       } on FirebaseAuthException catch (e) {
-        emit(UserRegsitationErrorState(Error: e.code.toString()));
+        if (e.code == 'email-already-in-use') {
+          emit(UserRegsitationErrorState(Error: e.message.toString()));
+        }
+        emit(UserRegsitationErrorState(Error: e.message.toString()));
       } on SocketException catch (e) {
         emit(UserRegsitationErrorState(Error: 'Internet error'));
       } catch (e) {
