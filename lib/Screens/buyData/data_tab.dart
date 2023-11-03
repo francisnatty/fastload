@@ -1,6 +1,6 @@
 import 'package:fastload/Screens/buyData/serviceProvider/airtel.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/glo.dart';
-import 'package:fastload/Screens/buyData/serviceProvider/mtn.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/mtnbloc.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/ninemobile.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
@@ -23,7 +23,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
         appBar: AppBar(
           backgroundColor: primaryColor,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_outlined),
+            icon: const Icon(Icons.arrow_back_ios_new_outlined),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -69,11 +69,11 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                     ]),
               ),
               Expanded(
-                  child: TabBarView(controller: controller, children: [
-                const MtnData(),
-                const AirtelData(),
-                const GloData(),
-                const NineMobileData(),
+                  child: TabBarView(controller: controller, children: const [
+                MtnBlocSreen(),
+                AirtelData(),
+                GloData(),
+                NineMobileData(),
               ]))
               // _tabSelection(context, controller),
             ],

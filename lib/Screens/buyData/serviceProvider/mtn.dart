@@ -42,7 +42,7 @@ class _MtnDataState extends State<MtnData> {
                   return Center(child: Text(snapshot.error.toString()));
                 }
               } else {
-                return Text('Poor internet');
+                return const Text('Poor internet');
               }
               final serviceData = snapshot.data;
               List<ServiceVariation> dataList = serviceData!.variations;

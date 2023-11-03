@@ -1,6 +1,4 @@
 import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
-import 'package:fastload/constants/colors.dart';
-import 'package:fastload/utils/pay_process_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +23,7 @@ class SuccessDialog extends StatelessWidget {
             color: Colors.red,
             opColor: Colors.red.withOpacity(0.3));
       } else {
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       }
     });
   }
@@ -51,7 +49,7 @@ class CustomDailog extends StatelessWidget {
             onPressed: () {
               context.read<SuccessDialogBloc>().resetDialogState();
             },
-            child: Text('Ok'))
+            child: const Text('Ok'))
       ],
       content: Column(
         children: [
@@ -79,11 +77,10 @@ class CustomDailog extends StatelessWidget {
           ),
           Text(
             subtitle,
-            style: TextStyle(fontFamily: 'Montserrat'),
+            style: const TextStyle(fontFamily: 'Montserrat'),
           ),
         ],
       ),
     );
-    ;
   }
 }

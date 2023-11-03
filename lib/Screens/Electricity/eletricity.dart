@@ -1,10 +1,6 @@
-import 'package:fastload/Screens/Electricity/Api/electric_api.dart';
-import 'package:fastload/Screens/Electricity/bloc/dailod.dart';
-import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
 import 'package:fastload/Screens/Electricity/prepaid.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ElectricityPage extends StatefulWidget {
   const ElectricityPage({super.key});
@@ -38,7 +34,7 @@ class _ElectricityPageState extends State<ElectricityPage>
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -52,14 +48,14 @@ class _ElectricityPageState extends State<ElectricityPage>
                         borderRadius: BorderRadius.circular(25)),
                     indicatorSize: TabBarIndicatorSize.tab,
                     controller: tabController,
-                    labelStyle: TextStyle(
+                    labelStyle: const TextStyle(
                         color: white,
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                         fontFamily: 'Montserrat'),
                     unselectedLabelColor: black,
                     labelColor: white,
-                    tabs: [
+                    tabs: const [
                       Tab(
                         text: 'Prepaid',
                       ),
@@ -71,7 +67,7 @@ class _ElectricityPageState extends State<ElectricityPage>
               Expanded(
                   child: TabBarView(
                 controller: tabController,
-                children: [
+                children: const [
                   PrepaidPage(),
                   Text('Natty'),
                 ],

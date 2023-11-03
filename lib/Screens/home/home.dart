@@ -1,5 +1,3 @@
-import 'package:fastload/Screens/Electricity/bloc/dailod.dart';
-import 'package:fastload/Screens/Electricity/bloc/sucessbloc.dart';
 import 'package:fastload/Screens/Electricity/eletricity.dart';
 import 'package:fastload/Screens/TvSub/tv_sub.dart';
 import 'package:fastload/Screens/airtime/airtime.dart';
@@ -11,7 +9,6 @@ import 'package:fastload/constants/variables.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {

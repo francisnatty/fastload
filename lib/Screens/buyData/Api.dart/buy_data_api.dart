@@ -28,12 +28,13 @@ class DataAPI {
       });
       final Map<String, dynamic> data = json.decode(response.body);
       return ServiceData.fromJson(data['content']);
-    } on SocketException catch (e) {
+    } on SocketException {
       Utils.showSnackBar(context, 'Little or no Internet Connection');
     } catch (e) {
       Utils.showSnackBar(context, '$e');
       return null;
     }
+    return null;
   }
 
   Future<void> buyMtnData(BuildContext context, String serviceId,

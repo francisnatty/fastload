@@ -28,7 +28,7 @@ class _PrepaidPageState extends State<PrepaidPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Center(
@@ -38,7 +38,7 @@ class _PrepaidPageState extends State<PrepaidPage> {
             child: Image.asset(Images.electricity),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Material(
@@ -70,7 +70,7 @@ class _PrepaidPageState extends State<PrepaidPage> {
                               CircleAvatar(
                                 backgroundImage: Image.asset(e.photo).image,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Text(e.title),
@@ -82,16 +82,16 @@ class _PrepaidPageState extends State<PrepaidPage> {
             )
           ]),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         MyTextField(
             controller: meterNoController, hintText: 'Enter Meter Number'),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         MyTextField(controller: amtController, hintText: 'Amount'),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         SizedBox(
@@ -99,16 +99,16 @@ class _PrepaidPageState extends State<PrepaidPage> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {},
-            child: Text(
-              'Pay',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
                 foregroundColor: MaterialStateProperty.all<Color>(white),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)))),
+            child: const Text(
+              'Pay',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
           ),
         )
       ],

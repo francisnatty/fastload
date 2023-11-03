@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> screens = [
+    // const HomePage(),
     const HomePage(),
     const PinScreen(),
     const Center(

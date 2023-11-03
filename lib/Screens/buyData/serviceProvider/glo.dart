@@ -42,7 +42,7 @@ class _GloDataState extends State<GloData> {
                   return Center(child: Text(snapshot.error.toString()));
                 }
               } else {
-                return Center(child: Text('Poor Internet Connection'));
+                return const Center(child: Text('Poor Internet Connection'));
               }
 
               final serviceData = snapshot.data;

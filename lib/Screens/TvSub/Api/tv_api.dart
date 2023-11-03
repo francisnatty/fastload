@@ -22,5 +22,6 @@ class TvApi {
       print(e);
       return null;
     }
+    return null;
   }
 }

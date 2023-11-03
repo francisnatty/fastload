@@ -17,7 +17,7 @@ class _AirtelDataState extends State<AirtelData> {
   String? dropdownValue;
   ServiceVariation? selectedItem;
   Color onclickedColor = const Color.fromRGBO(0, 0, 0, 1);
-  bool onCliced = false;
+  bool onClicked = false;
   bool isLoading = false;
 
   @override
@@ -42,7 +42,7 @@ class _AirtelDataState extends State<AirtelData> {
                   return Center(child: Text(snapshot.error.toString()));
                 }
               } else {
-                return Text('poor internet');
+                return const Text('poor internet');
               }
 
               final serviceData = snapshot.data;
@@ -105,9 +105,10 @@ class _AirtelDataState extends State<AirtelData> {
   }
 
   Container dataPakage(String price, String dataSize) {
-    List<String> parts = dataSize.split(' ');
+    List<String> parts = dataSize.split('-');
+    String data = parts[1];
+    List<String> dataSplitted = data.split(' ');
     print(parts);
-    print(dataSize);
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -118,21 +119,23 @@ class _AirtelDataState extends State<AirtelData> {
           borderRadius: BorderRadius.circular(20)),
       child: GestureDetector(
         onTap: () {
-          setState(() {});
+          setState(() {
+            onClicked = true;
+          });
         },
         child: Column(children: [
           Expanded(
               child: Text(
-            parts[4],
+            dataSplitted[1],
             style: TextStyle(color: black, fontWeight: FontWeight.bold),
           )),
           Text(
-            parts[7],
+            parts[2],
             style: const TextStyle(
                 color: primaryColor, fontWeight: FontWeight.w600),
           ),
           Text(
-            parts.contains(9) ? '${parts[9]}' : '',
+            parts.contains(3) ? parts[3] : '7 days',
             style: const TextStyle(color: primaryColor, fontSize: 12),
           )
         ]),
