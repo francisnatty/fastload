@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:fastload/bloc/auth/auth_bloc.dart';
 import 'package:fastload/bloc/auth/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
+
+import 'auth_bloc.dart';
 
 part 'auth_state.dart';
 
@@ -11,8 +14,16 @@ class AuthBloc extends Bloc<UserRegistrationEvent, UserRegsitationState> {
   final AuthRepository authRepository;
   AuthBloc({required this.authRepository})
       : super(UserRegsitationInitialState()) {
+    on<RequestPasswordResetLink>((event, emit) async {
+      emit(LoadingState());
+      final request = await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: event.email)
+          .then((value) {
+        emit(ResetLinkSent());
+      });
+    });
     on<RegisterUser>((event, emit) async {
-      emit(UserRegsitationLoadingState());
+      emit(LoadingState());
 
       try {
         final user =
@@ -42,7 +53,7 @@ class AuthBloc extends Bloc<UserRegistrationEvent, UserRegsitationState> {
     });
 
     on<LoginUser>((event, emit) async {
-      emit(UserRegsitationLoadingState());
+      emit(LoadingState());
 
       try {
         final user =

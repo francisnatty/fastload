@@ -2,6 +2,7 @@ import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/Screens/registration/components/pass_reset_bs.dart';
 import 'package:fastload/bloc/auth/auth_bloc.dart';
 import 'package:fastload/constants/colors.dart';
+import 'package:fastload/constants/image.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:fastload/widgets/big_textfield.dart';
 import 'package:flutter/material.dart';
@@ -131,9 +132,12 @@ class _SignUpState extends State<SignUp> {
                               }
                             },
                             builder: (context, state) {
-                              if (state is UserRegsitationLoadingState) {
-                                return const CircularProgressIndicator(
-                                  color: white,
+                              if (state is LoadingState) {
+                                return Center(
+                                  child: SizedBox(
+                                      height: 25,
+                                      width: 25,
+                                      child: Image.asset(Images.loadingGif)),
                                 );
                               } else {
                                 return Text(

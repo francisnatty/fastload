@@ -98,7 +98,7 @@ class _SignInState extends State<SignIn> {
                               }
                             },
                             builder: (context, state) {
-                              if (state is UserRegsitationLoadingState) {
+                              if (state is LoadingState) {
                                 return const CircularProgressIndicator(
                                   color: white,
                                 );

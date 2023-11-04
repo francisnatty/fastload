@@ -27,6 +27,40 @@ class Utils {
         .push(MaterialPageRoute(builder: (context) => newScreen));
   }
 
+  static resetLinkSent(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Check Email',
+                  style: TextStyle(
+                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Icon(
+                  Iconsax.message,
+                  color: Colors.green,
+                ),
+              ],
+            ),
+            content: Column(
+              children: [
+                Text(
+                  'Pls check your email for password reset link',
+                  style: TextStyle(fontFamily: 'Montserrat'),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
   static emailSentDialog(BuildContext context) {
     return showDialog(
         context: context,

@@ -16,4 +16,7 @@ class Images {
   static String ikeja = 'assets/images/ikeja.png';
   static String kaduna = 'assets/images/kaduna.png';
   static String kano = 'assets/images/kano.png';
+
+  //
+  static String loadingGif = 'assets/images/loadinGif.gif';
 }

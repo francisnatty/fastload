@@ -2,6 +2,11 @@ part of 'auth_bloc.dart';
 
 abstract class UserRegistrationEvent {}
 
+class RequestPasswordResetLink extends UserRegistrationEvent {
+  final String email;
+  RequestPasswordResetLink({required this.email});
+}
+
 class LoginUser extends UserRegistrationEvent {
   final String email;
   final String password;
@@ -19,7 +24,7 @@ abstract class UserRegsitationState {}
 
 class UserRegsitationInitialState extends UserRegsitationState {}
 
-class UserRegsitationLoadingState extends UserRegsitationState {}
+class LoadingState extends UserRegsitationState {}
 
 class NavigateToSignInScreen extends UserRegsitationState {}
 
@@ -34,4 +39,5 @@ class UserRegsitationErrorState extends UserRegsitationState {
 }
 
 class UserRegistrationCodeSent extends UserRegsitationState {}
-//class UserRegistrationSendCode extends UserRegsitationState{}
+
+class ResetLinkSent extends UserRegsitationState {}
