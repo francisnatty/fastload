@@ -4,6 +4,7 @@ import 'package:fastload/Screens/registration/signin.dart';
 import 'package:fastload/bloc/auth/auth_bloc.dart';
 import 'package:fastload/bloc/auth/auth_repo.dart';
 import 'package:fastload/constants/variables.dart';
+import 'package:fastload/cubit/authchecck/authcheck_cubit.dart';
 import 'package:fastload/cubit/data_bloc.dart';
 import 'package:fastload/global/global_functions.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,9 @@ class MyApp extends StatelessWidget {
           fontFamily: fontName,
           useMaterial3: true,
         ),
-        home: const SignIn(),
+        home: BlocProvider(
+            create: (context) => AuthCheckCubit()..checkAuthStatus(),
+            child: const SignUp()),
       ),
     );
   }

@@ -19,14 +19,14 @@ class BigTextField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           contentPadding: const EdgeInsets.all(20),
-          filled: true,
-          fillColor: grey.withOpacity(0.2),
+          // filled: true,
+          // fillColor: grey.withOpacity(0.2),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40),
-              borderSide: BorderSide.none),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: grey)),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40),
-              borderSide: BorderSide(color: primaryColor, width: 2))),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: primaryColor, width: 2))),
     );
   }
 }
@@ -50,14 +50,14 @@ class BigPassTextField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           contentPadding: const EdgeInsets.all(20),
-          filled: true,
-          fillColor: grey.withOpacity(0.2),
+          // filled: true,
+          // fillColor: grey.withOpacity(0.2),
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40),
-              borderSide: BorderSide.none),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: grey)),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40),
-              borderSide: BorderSide(color: primaryColor, width: 2))),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: primaryColor, width: 2))),
     );
   }
 }
