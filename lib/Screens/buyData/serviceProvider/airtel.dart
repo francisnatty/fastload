@@ -1,7 +1,6 @@
 import 'package:fastload/Screens/buyData/Api.dart/buy_data_api.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/constants/colors.dart';
-import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
 
 class AirtelData extends StatefulWidget {
@@ -30,6 +29,7 @@ class _AirtelDataState extends State<AirtelData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.transparent,
         body: FutureBuilder<ServiceData?>(
             future: DataAPI().getMtnDataPlans(context, 'airtel-data'),
             builder: (context, snapshot) {
@@ -64,11 +64,11 @@ class _AirtelDataState extends State<AirtelData> {
                     const SizedBox(
                       height: 20,
                     ),
-                    MyTextField(
-                        controller: phoneController, hintText: 'Enter number'),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // MyTextField(
+                    //     controller: phoneController, hintText: 'Enter number',),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     SizedBox(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.07,
@@ -108,7 +108,6 @@ class _AirtelDataState extends State<AirtelData> {
     List<String> parts = dataSize.split('-');
     String data = parts[1];
     List<String> dataSplitted = data.split(' ');
-    print(parts);
 
     return Container(
       padding: const EdgeInsets.all(8),

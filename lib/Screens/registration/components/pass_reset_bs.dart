@@ -6,11 +6,10 @@ import 'package:fastload/utils/utils.dart';
 import 'package:fastload/widgets/myTextField.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PassResetBottomSheet extends StatefulWidget {
-  PassResetBottomSheet({super.key});
+  const PassResetBottomSheet({super.key});
 
   @override
   State<PassResetBottomSheet> createState() => _PassResetBottomSheetState();
@@ -22,60 +21,67 @@ class _PassResetBottomSheetState extends State<PassResetBottomSheet> {
   @override
   Widget build(BuildContext context) {
     // final authBloc=AuthBloc(authRepository: )
-    return IntrinsicHeight(
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
       child: Padding(
-        padding: MediaQuery.of(context).viewInsets,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Text(
-              'Request Password Reset Link',
-              style: boldText,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            MyTextField(controller: emailController, hintText: 'Enter Email'),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                  onPressed: () {
-                    BlocProvider.of<AuthBloc>(context).add(
-                        RequestPasswordResetLink(email: emailController.text));
-                  },
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(primaryColor),
-                      foregroundColor: MaterialStateProperty.all<Color>(white),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)))),
-                  child: BlocConsumer<AuthBloc, UserRegsitationState>(
-                    listener: (context, state) {
-                      if (state is ResetLinkSent) {
-                        Utils.resetLinkSent(context);
-                      }
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                'Request Password Reset Link',
+                style: boldText,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              MyTextField(
+                controller: emailController,
+                hintText: 'Enter Email',
+                fillColor: Colors.grey[300]!,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context).add(
+                          RequestPasswordResetLink(
+                              email: emailController.text));
                     },
-                    builder: (context, state) {
-                      if (state is LoadingState) {
-                        return Center(
-                          child: SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Image.asset(Images.loadingGif),
-                          ),
-                        );
-                      } else {
-                        return Text('Request');
-                      }
-                    },
-                  )),
-            )
-          ]),
-        ),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(primaryColor),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(white),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                    child: BlocConsumer<AuthBloc, UserRegsitationState>(
+                      listener: (context, state) {
+                        if (state is ResetLinkSent) {
+                          Utils.resetLinkSent(context);
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is ResetPageloading) {
+                          return Center(
+                            child: SizedBox(
+                              height: 25,
+                              width: 25,
+                              child: Image.asset(Images.loadingGif),
+                            ),
+                          );
+                        } else {
+                          return const Text('Request');
+                        }
+                      },
+                    )),
+              )
+            ]),
       ),
     );
   }

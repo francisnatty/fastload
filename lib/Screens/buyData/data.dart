@@ -1,6 +1,5 @@
 import 'package:fastload/Screens/buyData/components/select_provider.dart';
 import 'package:fastload/constants/colors.dart';
-import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
 
 class Data extends StatefulWidget {
@@ -25,19 +24,19 @@ class _DataState extends State<Data> {
               fontSize: 18,
             ),
           )),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: const Padding(
+        padding: EdgeInsets.all(8.0),
         child: Column(children: [
-          const SelectProvider(),
-          const SizedBox(
+          SelectProvider(),
+          SizedBox(
             height: 15,
           ),
-          MyTextField(
-              controller: phoneController, hintText: 'Select Data Plan'),
-          const SizedBox(
+          // MyTextField(
+          //     controller: phoneController, hintText: 'Select Data Plan'),
+          SizedBox(
             height: 20,
           ),
-          MyTextField(controller: phoneController, hintText: 'Enter number'),
+          // MyTextField(controller: phoneController, hintText: 'Enter number'),
         ]),
       ),
     );

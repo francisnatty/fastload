@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWeight = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.withOpacity(0.3),
         body: Form(
           key: _formKey,
           child: SafeArea(
@@ -52,9 +52,9 @@ class _SignUpState extends State<SignUp> {
                         child: const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Login',
+                            'Welcome back!',
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white60,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                                 isScrollControlled: true,
                                 context: context,
                                 builder: (context) {
-                                  return PassResetBottomSheet();
+                                  return const PassResetBottomSheet();
                                 });
                           },
                           style: TextButton.styleFrom(
@@ -120,12 +120,12 @@ class _SignUpState extends State<SignUp> {
                                     context, state.Error.toString());
                               } else if (state is NavigateToHomeScreen) {
                                 Utils.pushAndRemoveScreen(
-                                    context, HomeScreen());
+                                    context, const HomeScreen());
                               } else if (state is NavigateToSignInScreen) {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUp()),
+                                        builder: (context) => const SignUp()),
                                     (route) => false);
                               } else if (state is UserRegistrationCodeSent) {
                                 Utils.emailSentDialog(context);
@@ -140,7 +140,7 @@ class _SignUpState extends State<SignUp> {
                                       child: Image.asset(Images.loadingGif)),
                                 );
                               } else {
-                                return Text(
+                                return const Text(
                                   'LOGIN',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 );
@@ -157,9 +157,18 @@ class _SignUpState extends State<SignUp> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Dont have an account?'),
+                            Text(
+                              'Don\'t have an account?',
+                              style: TextStyle(color: dWhite),
+                            ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const SignUp()),
+                                    (route) => false);
+                              },
                               style: TextButton.styleFrom(
                                   foregroundColor: Colors.orange.shade800),
                               child: const Text(

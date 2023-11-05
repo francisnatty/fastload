@@ -1,7 +1,6 @@
 import 'package:fastload/Screens/Electricity/model.dart/meter_companies.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
-import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
 
 class PrepaidPage extends StatefulWidget {
@@ -85,15 +84,15 @@ class _PrepaidPageState extends State<PrepaidPage> {
         const SizedBox(
           height: 20,
         ),
-        MyTextField(
-            controller: meterNoController, hintText: 'Enter Meter Number'),
-        const SizedBox(
-          height: 20,
-        ),
-        MyTextField(controller: amtController, hintText: 'Amount'),
-        const SizedBox(
-          height: 30,
-        ),
+        // MyTextField(
+        //     controller: meterNoController, hintText: 'Enter Meter Number'),
+        // const SizedBox(
+        //   height: 20,
+        // ),
+        // MyTextField(controller: amtController, hintText: 'Amount'),
+        // const SizedBox(
+        //   height: 30,
+        // ),
         SizedBox(
           height: 50,
           width: double.infinity,

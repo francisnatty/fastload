@@ -31,7 +31,7 @@ class Utils {
     return showDialog(
         context: context,
         builder: (context) {
-          return CupertinoAlertDialog(
+          return const CupertinoAlertDialog(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -80,7 +80,7 @@ class Utils {
                 )
               ],
             ),
-            content: Column(
+            content: const Column(
               children: [
                 Text(
                   'Pls check your email for verification link',
@@ -98,7 +98,7 @@ class Utils {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => SignIn()),
+                      MaterialPageRoute(builder: (context) => const SignIn()),
                       (route) => false);
                 },
               )

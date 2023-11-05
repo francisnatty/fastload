@@ -1,7 +1,6 @@
 import 'package:fastload/Screens/buyData/Api.dart/buy_data_api.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/constants/colors.dart';
-import 'package:fastload/widgets/myTextField.dart';
 import 'package:flutter/material.dart';
 
 class GloData extends StatefulWidget {
@@ -64,11 +63,11 @@ class _GloDataState extends State<GloData> {
                     const SizedBox(
                       height: 20,
                     ),
-                    MyTextField(
-                        controller: phoneController, hintText: 'Enter number'),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // MyTextField(
+                    //     controller: phoneController, hintText: 'Enter number'),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     SizedBox(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.07,

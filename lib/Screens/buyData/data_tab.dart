@@ -1,6 +1,6 @@
 import 'package:fastload/Screens/buyData/serviceProvider/airtel.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/glo.dart';
-import 'package:fastload/Screens/buyData/serviceProvider/mtnbloc.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/mtn.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/ninemobile.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
@@ -20,6 +20,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor: greyBack,
         appBar: AppBar(
           backgroundColor: primaryColor,
           leading: IconButton(
@@ -40,7 +41,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
               Container(
                 height: 45,
                 decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(25)),
                 child: TabBar(
                     indicatorSize: TabBarIndicatorSize.tab,
@@ -50,6 +51,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                     labelStyle: const TextStyle(
                         fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
                     labelColor: Colors.white,
+                    dividerColor: Colors.transparent,
                     indicator: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.circular(25.0)),
@@ -70,7 +72,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
               ),
               Expanded(
                   child: TabBarView(controller: controller, children: const [
-                MtnBlocSreen(),
+                MtnData(),
                 AirtelData(),
                 GloData(),
                 NineMobileData(),

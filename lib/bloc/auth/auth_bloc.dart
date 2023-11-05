@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:fastload/bloc/auth/auth_bloc.dart';
 import 'package:fastload/bloc/auth/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
-
-import 'auth_bloc.dart';
 
 part 'auth_state.dart';
 
@@ -39,8 +36,7 @@ class AuthBloc extends Bloc<UserRegistrationEvent, UserRegsitationState> {
         }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'email-already-in-use') {
-          emit(UserRegsitationErrorState(
-              Error: e.message.toString() + ',LOGIN'));
+          emit(UserRegsitationErrorState(Error: '${e.message},LOGIN'));
           emit(NavigateToSignInScreen());
         }
 

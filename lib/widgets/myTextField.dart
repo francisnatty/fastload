@@ -1,15 +1,15 @@
-import 'package:fastload/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final Color fillColor;
   // final String
-  const MyTextField({
-    super.key,
-    required this.controller,
-    required this.hintText,
-  });
+  const MyTextField(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      required this.fillColor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MyTextField extends StatelessWidget {
           hintText: hintText,
           contentPadding: const EdgeInsets.all(15),
           filled: true,
-          fillColor: grey.withOpacity(0.3),
+          fillColor: fillColor,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide.none),

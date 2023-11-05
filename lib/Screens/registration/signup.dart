@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
                         child: const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Login',
+                            'Create Account',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 25,
@@ -103,7 +103,7 @@ class _SignInState extends State<SignIn> {
                                   color: white,
                                 );
                               } else {
-                                return Text(
+                                return const Text(
                                   'LOGIN',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 );
@@ -120,13 +120,13 @@ class _SignInState extends State<SignIn> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Dont have an account?'),
+                            const Text('Already have an acct?'),
                             TextButton(
                               onPressed: () {},
                               style: TextButton.styleFrom(
                                   foregroundColor: Colors.orange.shade800),
                               child: const Text(
-                                'SignUp',
+                                'Login',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             )

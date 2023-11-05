@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 part 'authcheck_state.dart';
 
 class AuthCheckCubit extends Cubit<AuthCheckState> {
-  AuthCheckCubit() : super(AuthCheckState());
+  AuthCheckCubit() : super(const AuthCheckState());
 
   void checkAuthStatus() {
     final User? user = FirebaseAuth.instance.currentUser;

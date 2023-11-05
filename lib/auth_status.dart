@@ -1,7 +1,6 @@
 import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/Screens/registration/signup.dart';
 import 'package:fastload/cubit/authchecck/authcheck_cubit.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,9 +12,9 @@ class AuthStatus extends StatelessWidget {
     return BlocBuilder<AuthCheckCubit, AuthCheckState>(
         builder: (context, state) {
       if (state.user == null) {
-        return SignIn();
+        return const SignIn();
       } else {
-        return HomeScreen();
+        return const HomeScreen();
       }
     });
   }

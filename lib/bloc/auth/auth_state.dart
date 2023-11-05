@@ -41,3 +41,5 @@ class UserRegsitationErrorState extends UserRegsitationState {
 class UserRegistrationCodeSent extends UserRegsitationState {}
 
 class ResetLinkSent extends UserRegsitationState {}
+
+class ResetPageloading extends UserRegsitationState {}
