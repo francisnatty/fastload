@@ -143,6 +143,12 @@ class _HomePageState extends State<HomePage> {
                                       color: white,
                                       fontWeight: FontWeight.w700),
                                 ),
+                                Text(
+                                  'Wema Bank',
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 Row(
                                   children: [
                                     Text(
