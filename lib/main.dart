@@ -1,11 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/Screens/home/home_screen.dart';
+import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/bloc/auth/auth_bloc.dart';
 import 'package:fastload/bloc/auth/auth_repo.dart';
 import 'package:fastload/constants/variables.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/global/global_functions.dart';
+import 'package:fastload/paint.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

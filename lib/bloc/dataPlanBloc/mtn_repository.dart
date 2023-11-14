@@ -52,9 +52,9 @@ class MtnRepository {
           }));
 
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
       } else {
-        print(response.body);
+        //print(response.body);
       }
     } catch (e) {
       print(e);

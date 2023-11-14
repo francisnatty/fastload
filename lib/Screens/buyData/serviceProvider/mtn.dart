@@ -1,4 +1,3 @@
-import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/constants/colors.dart';
@@ -34,54 +33,54 @@ class _MtnDataState extends State<MtnData> {
           create: (context) => DataBloc(
             mtnRepository: MtnRepository(),
           )..add(FetchDataPlans()),
-          child: Column(
-            children: [
-              BlocConsumer<DataBloc, DataState>(listener: (context, state) {
-                if (state is DataSocketError) {
-                  //  const internetErrorDailog();
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const internetErrorDailog();
-                      });
-                }
-              }, builder: (context, state) {
-                if (state is DataLoading) {
-                  return Center(
-                    child: SizedBox(
-                      height: 35,
-                      width: 35,
-                      child: Image.asset(
-                        Images.loadingGif,
+          child: BlocConsumer<DataBloc, DataState>(listener: (context, state) {
+            if (state.status == DataStateEnum.error) {
+              Utils.showSnackBar(context, state.error.toString());
+            } else if (state.status == DataStateEnum.socketError) {
+              const internetErrorDailog();
+            }
+            // if (state is DataSocketError) {
+            //   //  const internetErrorDailog();
+            //   showDialog(
+            //       context: context,
+            //       builder: (context) {
+            //         return const internetErrorDailog();
+            //       });
+            // }
+          }, builder: (context, state) {
+            return Column(children: [
+              if (state.status == DataStateEnum.fetchingData)
+                Center(
+                  child: SizedBox(
+                    height: 35,
+                    width: 35,
+                    child: Image.asset(
+                      Images.loadingGif,
+                    ),
+                  ),
+                )
+              else if (state.dataPlans != null)
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: state.dataPlans!.variations.map((e) {
+                          String name = e.name;
+
+                          return dataPakage(e.code, e.name);
+                        }).toList(),
                       ),
-                    ),
-                  );
-                } else if (state is DataLoaded) {
-                  List<ServiceVariation> dataList = state.dataPlans.variations;
-
-                  return Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
-                          children: dataList.map((e) {
-                            String name = e.name;
-
-                            return dataPakage(e.code, e.name);
-                          }).toList(),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              }),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                )
+              else
+                const SizedBox.shrink(),
               const SizedBox(
                 height: 20,
               ),
@@ -94,16 +93,15 @@ class _MtnDataState extends State<MtnData> {
                 height: 20,
               ),
               SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.07,
-                  child: ElevatedButton(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.07,
+                child: ElevatedButton(
                     onPressed: () {
-                      BlocProvider.of<DataBloc>(context)
-                        ..add(BuyData(
-                            serviceId: 'mtn-data',
-                            variationCode: 'mtn-10mb-100',
-                            billersCode: 08011111111,
-                            phoneNum: 08011111111));
+                      context.read<DataBloc>().add(BuyData(
+                          serviceId: 'mtn-data',
+                          variationCode: 'mtn-10mb-100',
+                          billersCode: 08011111111,
+                          phoneNum: 08011111111));
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -114,31 +112,18 @@ class _MtnDataState extends State<MtnData> {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(primaryColor),
                     ),
-                    child: BlocConsumer<DataBloc, DataState>(
-                      listener: (context, state) {
-                        if (state is BuyDataError) {
-                          Utils.showSnackBar(context, state.error.toString());
-                        } else if (state is BuyDataSocketError) {
-                          const internetErrorDailog();
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state is BuyDataLoading) {
-                          return SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: Image.asset(Images.loadingGif));
-                        } else {
-                          return const Text(
+                    child: state.status == DataStateEnum.buyingData
+                        ? SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Image.asset(Images.loadingGif))
+                        : const Text(
                             'Buy data',
                             style: TextStyle(fontWeight: FontWeight.bold),
-                          );
-                        }
-                      },
-                    ),
-                  ))
-            ],
-          ),
+                          )),
+              )
+            ]);
+          }),
         ));
   }
 
