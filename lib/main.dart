@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fastload/Screens/chatApp/chat.dart';
+import 'package:fastload/Screens/chatApp/mes.dart';
 import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/bloc/auth/auth_bloc.dart';
@@ -13,17 +14,18 @@ import 'firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
   // HydratedBloc.storage = await HydratedStorage.build(
   //     storageDirectory: await getApplicationDocumentsDirectory());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MyApp(
     mtnRepository: MtnRepository(),
     connectivity: Connectivity(),
     authRepository: AuthRepository(),
   ));
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 class MyApp extends StatelessWidget {
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
           fontFamily: fontName,
           useMaterial3: true,
         ),
-        home: const ChatScreen(),
+        home: const mcsreen(),
       ),
     );
   }

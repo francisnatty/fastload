@@ -165,7 +165,7 @@ class _ChatScreenState extends State<ChatScreen> {
             // CollectionReference colRef = await firestore.collection('Chat');
             // DocumentReference docRef = await colRef.add({
             //   'senderID': 2,
-            //   'myID': 0,
+            //   'rece': 0,
             // });
 
             // await firestore
@@ -175,6 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
             //     .doc()
             //     .set({
             //   'message': 'haha,dude!!',
+            //   'senderId' : '1'
             // }).then((value) {
             //   print('sent data scucessfully');
             // });
@@ -192,13 +193,18 @@ class _ChatScreenState extends State<ChatScreen> {
                     .collection('Chat')
                     .doc(doc.id)
                     .collection('messages')
+                    .limit(50)
                     .get();
 
                 List<QueryDocumentSnapshot> documents = querySnapshot.docs;
                 for (var document in documents) {
                   //accessing fields in the documents;
-                  var message = document.data();
-                  print(message);
+                  var message = document.data() as Map<String, dynamic>;
+                  print(message['message']);
+                  var id = message['senderID'];
+                  if (id == '2') {
+                    print('blue');
+                  }
                 }
               });
             } else {
