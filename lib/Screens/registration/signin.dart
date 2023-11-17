@@ -8,14 +8,14 @@ import 'package:fastload/widgets/big_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignInState extends State<SignIn> {
   @override
   void dispose() {
     emailController.dispose();
@@ -125,7 +125,7 @@ class _SignUpState extends State<SignUp> {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const SignUp()),
+                                        builder: (context) => const SignIn()),
                                     (route) => false);
                               } else if (state is UserRegistrationCodeSent) {
                                 Utils.emailSentDialog(context);
@@ -166,7 +166,7 @@ class _SignUpState extends State<SignUp> {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const SignUp()),
+                                        builder: (context) => const SignIn()),
                                     (route) => false);
                               },
                               style: TextButton.styleFrom(

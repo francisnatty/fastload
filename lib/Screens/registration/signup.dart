@@ -5,14 +5,14 @@ import 'package:fastload/widgets/big_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   @override
   void dispose() {
     emailController.dispose();
@@ -29,7 +29,7 @@ class _SignInState extends State<SignIn> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWeight = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.withOpacity(0.2),
         body: Form(
           key: _formKey,
           child: SafeArea(
@@ -75,9 +75,16 @@ class _SignInState extends State<SignIn> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            BlocProvider.of<AuthBloc>(context).add(RegisterUser(
-                                email: emailController.text,
-                                password: passController.text));
+                            if (emailController.text.isNotEmpty &&
+                                passController.text.isNotEmpty) {
+                              BlocProvider.of<AuthBloc>(context).add(
+                                  RegisterUser(
+                                      email: emailController.text,
+                                      password: passController.text));
+                            } else {
+                              Utils.showSnackBar(
+                                  context, 'fields cannot be empty');
+                            }
                           },
                           style: ButtonStyle(
                               foregroundColor:

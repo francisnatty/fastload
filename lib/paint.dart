@@ -19,38 +19,70 @@ class _PaintAppState extends State<PaintApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Custom Paint'),
-        centerTitle: true,
-      ),
-      body: Center(
-          child: Container(
-              height: 200,
-              width: 200,
+        appBar: AppBar(
+          title: const Text('Custom Paint'),
+          centerTitle: true,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
               child: CustomPaint(
-                painter: MyPainter(),
-              ))),
-    );
+                painter: Pentagon(),
+                size: Size(MediaQuery.sizeOf(context).width / 5,
+                    MediaQuery.sizeOf(context).height / 5),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: ClipPath(
+                clipper: PentagoClip(),
+                child: Container(
+                    color: Colors.green,
+                    width: MediaQuery.sizeOf(context).width / 5,
+                    height: MediaQuery.sizeOf(context).height / 5),
+              ),
+            )
+          ],
+        ));
   }
 }
 
-class MyPainter extends CustomPainter {
+class PentagoClip extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    var paint = Paint()..color = Colors.blue;
+
+    //  path.moveTo(0, size.height * 0.4);
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    // path.lineTo(size.width, size.height * 0.4);
+    path.lineTo(0, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
+}
+
+class Pentagon extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = Colors.red
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 20;
+    var path = Path();
+    var paint = Paint()..color = Colors.blue;
 
-    var linePaint = Paint();
-    linePaint.color = Colors.green;
-    linePaint.strokeWidth = 20;
-    // linePaint.strokeCap = 10.0;
+    path.moveTo(0, size.height * 0.4);
+    path.lineTo(0, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, size.height * 0.4);
+    path.lineTo(size.width * 0.5, 0);
+    path.close();
 
-    canvas.drawCircle(
-        Offset(size.height / 2, size.width / 2), size.width / 2, paint);
-    canvas.drawLine(Offset(0, size.height / 2),
-        Offset(size.width * 0.7, size.height / 2), linePaint);
+    canvas.drawPath(path, paint);
   }
 
   @override

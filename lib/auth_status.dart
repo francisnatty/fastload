@@ -12,7 +12,7 @@ class AuthStatus extends StatelessWidget {
     return BlocBuilder<AuthCheckCubit, AuthCheckState>(
         builder: (context, state) {
       if (state.user == null) {
-        return const SignIn();
+        return const SignUp();
       } else {
         return const HomeScreen();
       }

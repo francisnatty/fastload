@@ -19,4 +19,6 @@ class Images {
 
   //
   static String loadingGif = 'assets/images/loadinGif.gif';
+
+  static String paybills = 'assets/images/paybills.webp';
 }

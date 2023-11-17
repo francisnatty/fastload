@@ -112,7 +112,9 @@ flutter:
         - asset: assets/fonts/Montserrat-Medium.ttf
           weight: 500
         - asset: assets/fonts/Montserrat-Thin.ttf  
-         
+    - family: Victor
+      fonts:
+        - asset: assets/fonts/VictorMono-Bold.ttf    
          
    
   #

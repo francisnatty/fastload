@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                     width: screenwidth * 0.03,
                   ),
                   const Text(
-                    'Hello, Natty',
+                    'Hello, Chief',
                     style: TextStyle(
                         fontWeight: FontWeight.w900, fontFamily: fontName),
                   ),
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                                       color: white,
                                       fontWeight: FontWeight.w700),
                                 ),
-                                Text(
+                                const Text(
                                   'Wema Bank',
                                   style: TextStyle(
                                       color: Colors.grey,

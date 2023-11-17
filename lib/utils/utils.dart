@@ -98,7 +98,7 @@ class Utils {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignIn()),
+                      MaterialPageRoute(builder: (context) => const SignUp()),
                       (route) => false);
                 },
               )
