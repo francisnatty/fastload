@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastload/Screens/chatApp/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/image.dart';
+
 class TryChat extends StatefulWidget {
   const TryChat({Key? key, required this.friendId, required this.chatId})
       : super(key: key);
@@ -14,6 +16,8 @@ class TryChat extends StatefulWidget {
 }
 
 class _TryChatState extends State<TryChat> {
+  bool? hasChatted;
+  var docId;
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,10 @@ class _TryChatState extends State<TryChat> {
                     );
                   } else if (snapshot.hasData) {
                     //var messages = snapshot.data!.docs;
+                    if (snapshot.data!.docs.isNotEmpty)
+                      hasChatted = true;
+                    else
+                      hasChatted = false;
 
                     List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
                     return Expanded(
@@ -89,7 +97,14 @@ class _TryChatState extends State<TryChat> {
         ),
         IconButton(
           onPressed: () async {
-            MessageService().sendMessage('0', 'i would love to meet with you');
+            if (hasChatted != null && hasChatted == true) {
+              print('second');
+              MessageService()
+                  .sendMessage(widget.chatId, 'thanks..catch you later');
+            } else {
+              print('first');
+              MessageService().firstTimeMessage('0', 'see you later');
+            }
           },
           icon: const Icon(Icons.send),
           color: Colors.red,
@@ -108,6 +123,7 @@ class _TryChatState extends State<TryChat> {
         SizedBox(width: current ? 30.0 : 20),
         if (!current) ...[
           CircleAvatar(
+            backgroundImage: AssetImage(Images.naijaFlag),
             // backgroundImage: AssetImage(current ? avatars[0] : avatars[1]),
             radius: 20.0,
           ),
@@ -178,10 +194,10 @@ class _TryChatState extends State<TryChat> {
           const SizedBox(
             width: 5.0,
           ),
-          // CircleAvatar(
-          //   backgroundImage: AssetImage(current ? avatars[0] : avatars[1]),
-          //   radius: 10.0,
-          // )
+          CircleAvatar(
+            backgroundImage: AssetImage(Images.userAvatar),
+            radius: 10.0,
+          )
         ],
         SizedBox(
           width: current ? 20 : 30,
