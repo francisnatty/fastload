@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fastload/Screens/chatApp/helpers/helper_functions.dart';
 import 'package:fastload/Screens/chatApp/tryChat.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +27,8 @@ class _mcsreenState extends State<mcsreen> {
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('Chat')
-              .where('myID', isEqualTo: 0)
+              .where('senderID', isEqualTo: '0')
+              //  .where('receiverID', isEqualTo: '0')
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -36,8 +40,19 @@ class _mcsreenState extends State<mcsreen> {
             } else {
               var documents = snapshot.data!.docs;
 
-              if (documents == null) {
-                return Text('No messages');
+              if (documents.isEmpty) {
+                return Center(
+                    child: Column(
+                  children: [
+                    Text('No messages'),
+                    ElevatedButton(
+                        onPressed: () {
+                          MessageService().sendMessage(
+                              '0', 'i would love to meet with you');
+                        },
+                        child: Text('send message'))
+                  ],
+                ));
               }
               return ListView.separated(
                   separatorBuilder: ((context, index) {
@@ -47,10 +62,10 @@ class _mcsreenState extends State<mcsreen> {
                   }),
                   itemCount: documents.length,
                   itemBuilder: (context, index) {
-                    var id = documents[index]['senderID'];
+                    var senderId = documents[index]['senderID'];
                     var name = documents[index]['senderName'];
 
-                    var messageid = documents[index].id;
+                    var id = documents[index].id;
 
                     return Center(
                         child: InkWell(
@@ -59,8 +74,8 @@ class _mcsreenState extends State<mcsreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => TryChat(
-                                      friendId: id,
-                                      messageid: messageid,
+                                      friendId: senderId.toString(),
+                                      chatId: id,
                                     )));
                       },
                       child: Row(
