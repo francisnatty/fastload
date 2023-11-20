@@ -7,6 +7,8 @@ class MessageService {
     DocumentReference docRef = await colRef.add({
       'senderID': '0',
       'receiverID': '1',
+      'senderName': 'Francis Natty',
+      'lastMessage': message
     });
     await firestore
         .collection('Chat')
@@ -16,7 +18,7 @@ class MessageService {
         .set({
       'message': message,
       'senderId': '0',
-      'timestamp': FieldValue.serverTimestamp()
+      'timestamp': FieldValue.serverTimestamp(),
     }).then((value) {
       print('sent data scucessfully');
     });
@@ -24,6 +26,10 @@ class MessageService {
 
   Future<void> sendMessage(String docId, String message) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    firestore.collection('Chat').doc(docId).update({
+      'lastMessage': message,
+    });
 
     await firestore
         .collection('Chat')

@@ -1,15 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastload/Screens/chatApp/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../constants/image.dart';
 
 class TryChat extends StatefulWidget {
-  const TryChat({Key? key, required this.friendId, required this.chatId})
+  const TryChat(
+      {Key? key,
+      required this.friendId,
+      required this.chatId,
+      required this.friendName})
       : super(key: key);
 
   final String chatId;
   final String friendId;
+  final String friendName;
 
   @override
   State<TryChat> createState() => _TryChatState();
@@ -23,7 +29,20 @@ class _TryChatState extends State<TryChat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chats'),
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(Images.userAvatar),
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Text(
+              widget.friendName,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+            ),
+          ],
+        ),
       ),
       body: Padding(
           padding: EdgeInsets.all(8.0),
@@ -53,12 +72,23 @@ class _TryChatState extends State<TryChat> {
                       child: ListView.builder(
                         itemCount: documents.length,
                         itemBuilder: (context, index) {
+                          print(documents[index]['photo']);
                           String message = documents[index]['message'];
                           var senderID = documents[index]['senderId'];
+                          Timestamp timestamp = documents[index]['timestamp'];
+                          DateTime date = timestamp.toDate();
+                          String formattedDate =
+                              "${date.hour} : ${date.minute}";
+
+                          String photo = documents[index]['photo'];
+                          // String photo = '';
+
                           if (senderID == '0') {
-                            return _buildMessageRow(message, current: true);
+                            return _buildMessageRow(
+                                photo, message, true, formattedDate);
                           } else {
-                            return _buildMessageRow(message, current: false);
+                            return _buildMessageRow(
+                                photo, message, false, formattedDate);
                           }
                         },
                       ),
@@ -81,8 +111,15 @@ class _TryChatState extends State<TryChat> {
 
   Container _buildBottomBar(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
       child: Row(children: [
+        Icon(
+          Icons.photo_album_outlined,
+          size: 30,
+        ),
+        SizedBox(
+          width: 15,
+        ),
         Expanded(
           child: TextField(
             textInputAction: TextInputAction.send,
@@ -98,11 +135,9 @@ class _TryChatState extends State<TryChat> {
         IconButton(
           onPressed: () async {
             if (hasChatted != null && hasChatted == true) {
-              print('second');
               MessageService()
                   .sendMessage(widget.chatId, 'thanks..catch you later');
             } else {
-              print('first');
               MessageService().firstTimeMessage('0', 'see you later');
             }
           },
@@ -113,7 +148,8 @@ class _TryChatState extends State<TryChat> {
     );
   }
 
-  Row _buildMessageRow(String message, {required bool current}) {
+  Row _buildMessageRow(
+      String photo, String message, bool current, String date) {
     return Row(
       mainAxisAlignment:
           current ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -164,14 +200,32 @@ class _TryChatState extends State<TryChat> {
                           ? CrossAxisAlignment.end
                           : CrossAxisAlignment.start,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: Text(
-                            message,
-                            style: TextStyle(
-                                color: current ? Colors.white : Colors.black),
-                          ),
-                        ),
+                        photo.isEmpty
+                            ? Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Text(
+                                  message,
+                                  style: TextStyle(
+                                      color: current
+                                          ? Colors.white
+                                          : Colors.black),
+                                ),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: SizedBox(
+                                  height: 200, width: 200,
+
+                                  //  width: MediaQuery.sizeOf(context).width / 2,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                      photo,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
                         const Icon(
                           Icons.done_all,
                           size: 14,
@@ -183,7 +237,7 @@ class _TryChatState extends State<TryChat> {
                 height: 2,
               ),
               Text(
-                "2:02",
+                date,
                 style: TextStyle(
                     fontSize: 12, color: Colors.black.withOpacity(0.5)),
               )

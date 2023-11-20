@@ -27,8 +27,8 @@ class _mcsreenState extends State<mcsreen> {
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('Chat')
-              .where('senderID', isEqualTo: '0')
-              //  .where('receiverID', isEqualTo: '0')
+              .where(Filter.or(Filter('senderID', isEqualTo: '0'),
+                  Filter('receiverID', isEqualTo: '0')))
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -62,6 +62,7 @@ class _mcsreenState extends State<mcsreen> {
                   }),
                   itemCount: documents.length,
                   itemBuilder: (context, index) {
+                    //  var lastMessage = documents[index]['lastMessage'];
                     var senderId = documents[index]['senderID'];
                     var name = documents[index]['senderName'];
 
@@ -76,6 +77,7 @@ class _mcsreenState extends State<mcsreen> {
                                 builder: (context) => TryChat(
                                       friendId: senderId.toString(),
                                       chatId: id,
+                                      friendName: name,
                                     )));
                       },
                       child: Row(
