@@ -14,6 +14,7 @@ class mcsreen extends StatefulWidget {
 }
 
 class _mcsreenState extends State<mcsreen> {
+  String myId = '0';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +65,9 @@ class _mcsreenState extends State<mcsreen> {
                   itemBuilder: (context, index) {
                     //  var lastMessage = documents[index]['lastMessage'];
                     var senderId = documents[index]['senderID'];
-                    var name = documents[index]['senderName'];
+                    var senderName = documents[index]['senderName'];
+                    var receiverName = documents[index]['receiverName'];
+                    var receiverID = documents[index]['receiverID'];
 
                     var id = documents[index].id;
 
@@ -77,7 +80,7 @@ class _mcsreenState extends State<mcsreen> {
                                 builder: (context) => TryChat(
                                       friendId: senderId.toString(),
                                       chatId: id,
-                                      friendName: name,
+                                      friendName: senderName,
                                     )));
                       },
                       child: Row(
@@ -89,12 +92,18 @@ class _mcsreenState extends State<mcsreen> {
                           Column(
                             //  mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                name,
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(id.toString()),
+                            children: <Widget>[
+                              if (receiverID == myId)
+                                Text(
+                                  senderName,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )
+                              else if (senderId == myId)
+                                Text(
+                                  receiverName,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              Text('sender')
                             ],
                           ),
                         ],
