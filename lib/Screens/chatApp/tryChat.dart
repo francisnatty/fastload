@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastload/Screens/chatApp/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../constants/image.dart';
 
@@ -34,18 +33,18 @@ class _TryChatState extends State<TryChat> {
             CircleAvatar(
               backgroundImage: AssetImage(Images.userAvatar),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             Text(
               widget.friendName,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
             ),
           ],
         ),
       ),
       body: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               StreamBuilder(
@@ -57,15 +56,16 @@ class _TryChatState extends State<TryChat> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (snapshot.hasData) {
                     //var messages = snapshot.data!.docs;
-                    if (snapshot.data!.docs.isNotEmpty)
+                    if (snapshot.data!.docs.isNotEmpty) {
                       hasChatted = true;
-                    else
+                    } else {
                       hasChatted = false;
+                    }
 
                     List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
                     return Expanded(
@@ -99,7 +99,7 @@ class _TryChatState extends State<TryChat> {
                     print('error');
                     return Text(snapshot.error.toString());
                   } else {
-                    return Text('poor');
+                    return const Text('poor');
                   }
                 },
               ),
@@ -113,11 +113,11 @@ class _TryChatState extends State<TryChat> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
       child: Row(children: [
-        Icon(
+        const Icon(
           Icons.photo_album_outlined,
           size: 30,
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Expanded(
@@ -174,34 +174,36 @@ class _TryChatState extends State<TryChat> {
             crossAxisAlignment:
                 current ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                constraints: BoxConstraints(
-                    minHeight: 40,
-                    maxHeight: 250,
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                    minWidth: MediaQuery.of(context).size.width * 0.1),
-                decoration: BoxDecoration(
-                    color: current ? Colors.red : Colors.grey.withOpacity(0.2),
-                    borderRadius: current
-                        ? const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                            topRight: Radius.circular(20))
-                        : const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                            topRight: Radius.circular(20))),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, top: 10, bottom: 5, right: 5),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: current
-                          ? CrossAxisAlignment.end
-                          : CrossAxisAlignment.start,
-                      children: <Widget>[
-                        photo.isEmpty
-                            ? Padding(
+              photo.isEmpty
+                  ? Container(
+                      constraints: BoxConstraints(
+                          minHeight: 40,
+                          maxHeight: 250,
+                          maxWidth: MediaQuery.of(context).size.width * 0.7,
+                          minWidth: MediaQuery.of(context).size.width * 0.1),
+                      decoration: BoxDecoration(
+                          color: current
+                              ? Colors.blue
+                              : Colors.grey.withOpacity(0.2),
+                          borderRadius: current
+                              ? const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20))
+                              : const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                  topRight: Radius.circular(20))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, top: 10, bottom: 5, right: 5),
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: current
+                                ? CrossAxisAlignment.end
+                                : CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: Text(
                                   message,
@@ -210,29 +212,36 @@ class _TryChatState extends State<TryChat> {
                                           ? Colors.white
                                           : Colors.black),
                                 ),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: SizedBox(
-                                  height: 200, width: 200,
-
-                                  //  width: MediaQuery.sizeOf(context).width / 2,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Image.network(
-                                      photo,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
                               ),
-                        const Icon(
-                          Icons.done_all,
-                          size: 14,
-                        )
-                      ]),
-                ),
-              ),
+                              const Icon(
+                                Icons.done_all,
+                                size: 14,
+                              )
+                            ]),
+                      ),
+                    )
+                  : Container(
+                      constraints: BoxConstraints(
+                          minHeight: 40,
+                          maxHeight: 250,
+                          maxWidth: MediaQuery.of(context).size.width * 0.7,
+                          minWidth: MediaQuery.of(context).size.width * 0.1),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: SizedBox(
+                          height: 200, width: 200,
+
+                          //  width: MediaQuery.sizeOf(context).width / 2,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              Images.bitch,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
               const SizedBox(
                 height: 2,
               ),

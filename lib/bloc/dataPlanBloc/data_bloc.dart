@@ -10,14 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'data_state.dart';
 
 class DataBloc extends Bloc<DataEvent, DataState> {
-  final MtnRepository mtnRepository;
+  final DataRepository dataRepository;
 
-  DataBloc({required this.mtnRepository}) : super(const DataState()) {
+  DataBloc({required this.dataRepository}) : super(const DataState()) {
     on<BuyData>((event, emit) async {
       emit(state.copyWith(status: DataStateEnum.buyingData));
 
       try {
-        final buydata = await mtnRepository.buyMtnData(event.serviceId,
+        final buydata = await dataRepository.buyMtnData(event.serviceId,
             event.variationCode, event.billersCode, event.phoneNum);
         emit(state.copyWith(
           status: DataStateEnum.success,
@@ -28,17 +28,26 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         emit(state.copyWith(status: DataStateEnum.error, error: state.error));
       }
     });
-    on<FetchDataPlans>((event, emit) async {
-      emit(state.copyWith(status: DataStateEnum.fetchingData));
-      try {
-        final data = await mtnRepository.DataPlans();
-        emit(state.copyWith(status: DataStateEnum.success, dataPlans: data!));
-      } on SocketException {
-        emit(state.copyWith(status: DataStateEnum.socketError));
-      } catch (e) {
-        emit(state.copyWith(status: DataStateEnum.error, error: state.error));
-      }
-    });
+
+    on<FetchDataPlans>(
+      (event, emit) async {
+        // emit(state.copyWith(status: DataStateEnum.fetchingData));
+        try {
+          final mtndata = await dataRepository.DataPlans();
+          final airtelData = await dataRepository.AirtelDataPlan();
+          final gloData = await dataRepository.GloDataPlans();
+
+          List<ServiceData> allNetworks = [mtndata!, airtelData!, gloData!];
+
+          emit(state.copyWith(
+              status: DataStateEnum.success, allNetworks: allNetworks));
+        } on SocketException {
+          emit(state.copyWith(status: DataStateEnum.socketError));
+        } catch (e) {
+          emit(state.copyWith(status: DataStateEnum.error, error: state.error));
+        }
+      },
+    );
   }
 
   // void reloadState() {

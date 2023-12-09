@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fastload/Screens/chatApp/helpers/helper_functions.dart';
@@ -19,7 +18,7 @@ class _mcsreenState extends State<mcsreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
+          title: const Text(
         'Chat Screen',
         style: TextStyle(fontWeight: FontWeight.bold),
       )),
@@ -33,7 +32,7 @@ class _mcsreenState extends State<mcsreen> {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   color: Colors.green,
                 ),
@@ -45,19 +44,19 @@ class _mcsreenState extends State<mcsreen> {
                 return Center(
                     child: Column(
                   children: [
-                    Text('No messages'),
+                    const Text('No messages'),
                     ElevatedButton(
                         onPressed: () {
                           MessageService().sendMessage(
                               '0', 'i would love to meet with you');
                         },
-                        child: Text('send message'))
+                        child: const Text('send message'))
                   ],
                 ));
               }
               return ListView.separated(
                   separatorBuilder: ((context, index) {
-                    return SizedBox(
+                    return const SizedBox(
                       height: 10,
                     );
                   }),
@@ -96,14 +95,14 @@ class _mcsreenState extends State<mcsreen> {
                               if (receiverID == myId)
                                 Text(
                                   senderName,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 )
                               else if (senderId == myId)
                                 Text(
                                   receiverName,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                              Text('sender')
+                              const Text('sender')
                             ],
                           ),
                         ],

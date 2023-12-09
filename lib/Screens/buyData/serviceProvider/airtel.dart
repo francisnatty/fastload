@@ -1,7 +1,9 @@
 import 'package:fastload/Screens/buyData/Api.dart/buy_data_api.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
+import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AirtelData extends StatefulWidget {
   const AirtelData({super.key});
@@ -30,24 +32,11 @@ class _AirtelDataState extends State<AirtelData> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
-        body: FutureBuilder<ServiceData?>(
-            future: DataAPI().getMtnDataPlans(context, 'airtel-data'),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot != null) {
-                if (snapshot.hasError) {
-                  return Center(child: Text(snapshot.error.toString()));
-                }
-              } else {
-                return const Text('poor internet');
-              }
-
-              final serviceData = snapshot.data;
-              List<ServiceVariation> dataList = serviceData!.variations;
-
+        body: BlocConsumer<DataBloc, DataState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (state.status == DataStateEnum.success) {
+              //  ServiceData? dataList = [];
               return Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -55,11 +44,11 @@ class _AirtelDataState extends State<AirtelData> {
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
-                      children: dataList.map((e) {
-                        String name = e.name;
+                      // children: dataList!.variations.map((e) {
+                      //   String name = e.name;
 
-                        return dataPakage(e.code, e.name);
-                      }).toList(),
+                      //   return dataPakage(e.code, e.name);
+                      // }).toList(),
                     ),
                     const SizedBox(
                       height: 20,
@@ -101,7 +90,11 @@ class _AirtelDataState extends State<AirtelData> {
                   ],
                 ),
               );
-            }));
+            } else {
+              return Container();
+            }
+          },
+        ));
   }
 
   Container dataPakage(String price, String dataSize) {

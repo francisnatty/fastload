@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:fastload/Screens/chatApp/chat.dart';
 import 'package:fastload/Screens/chatApp/mes.dart';
 import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
@@ -22,7 +21,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MyApp(
-    mtnRepository: MtnRepository(),
+    mtnRepository: DataRepository(),
     connectivity: Connectivity(),
     authRepository: AuthRepository(),
   ));
@@ -30,7 +29,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Connectivity connectivity;
-  final MtnRepository mtnRepository;
+  final DataRepository mtnRepository;
   final AuthRepository authRepository;
   const MyApp(
       {super.key,
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => DataBloc(mtnRepository: mtnRepository)),
+            create: (context) => DataBloc(dataRepository: mtnRepository)),
         BlocProvider(
             create: (context) => AuthBloc(authRepository: authRepository))
       ],
@@ -56,7 +55,7 @@ class MyApp extends StatelessWidget {
           fontFamily: fontName,
           useMaterial3: true,
         ),
-        home: const mcsreen(),
+        home: const HomeScreen(),
       ),
     );
   }

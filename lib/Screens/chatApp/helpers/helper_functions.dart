@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class MessageService {
   Future<void> firstTimeMessage(String senderID, String message) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference colRef = await firestore.collection('Chat');
+    CollectionReference colRef = firestore.collection('Chat');
     DocumentReference docRef = await colRef.add({
       'senderID': '0',
       'receiverID': '1',

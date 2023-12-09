@@ -1,10 +1,14 @@
+import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/airtel.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/glo.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/mtn.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/ninemobile.dart';
+import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
+import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DataTab extends StatefulWidget {
   const DataTab({super.key});
@@ -34,51 +38,63 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25)),
-                child: TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    controller: controller,
-                    labelPadding: const EdgeInsets.all(10),
-                    unselectedLabelColor: black,
-                    labelStyle: const TextStyle(
-                        fontWeight: FontWeight.bold, fontFamily: 'Montserrat'),
-                    labelColor: Colors.white,
-                    dividerColor: Colors.transparent,
-                    indicator: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.circular(25.0)),
-                    tabs: const [
-                      Tab(
-                        text: 'Mtn',
-                      ),
-                      Tab(
-                        text: 'Airtel',
-                      ),
-                      Tab(
-                        text: 'Glo',
-                      ),
-                      Tab(
-                        text: '9mobile',
-                      ),
-                    ]),
-              ),
-              Expanded(
-                  child: TabBarView(controller: controller, children: const [
-                MtnData(),
-                AirtelData(),
-                GloData(),
-                NineMobileData(),
-              ]))
-              // _tabSelection(context, controller),
-            ],
+        body: BlocProvider(
+          create: (context) => DataBloc(dataRepository: DataRepository()),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25)),
+                  child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      controller: controller,
+                      labelPadding: const EdgeInsets.all(10),
+                      unselectedLabelColor: black,
+                      labelStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat'),
+                      labelColor: Colors.white,
+                      dividerColor: Colors.transparent,
+                      indicator: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(25.0)),
+                      tabs: const [
+                        Tab(
+                          text: 'Mtn',
+                        ),
+                        Tab(
+                          text: 'Airtel',
+                        ),
+                        Tab(
+                          text: 'Glo',
+                        ),
+                        Tab(
+                          text: '9mobile',
+                        ),
+                      ]),
+                ),
+                BlocBuilder<DataBloc, DataState>(builder: (context, state) {
+                  if (state.status == DataStateEnum.success) {
+                    ServiceData? mtn = state.allNetworks![0];
+                    return Expanded(
+                        child: TabBarView(controller: controller, children: [
+                      MtnData(mtnData: mtn),
+                      AirtelData(),
+                      GloData(),
+                      NineMobileData(),
+                    ]));
+                  } else {
+                    return Container();
+                  }
+                }),
+
+                // _tabSelection(context, controller),
+              ],
+            ),
           ),
         ),
       ),
