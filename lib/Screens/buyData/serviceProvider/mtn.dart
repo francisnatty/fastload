@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
@@ -11,15 +13,15 @@ import 'package:iconsax/iconsax.dart';
 import '../../../constants/image.dart';
 import '../components/internet_error_dialog.dart';
 
-class MtnData extends StatefulWidget {
+class Data extends StatefulWidget {
   final ServiceData? mtnData;
-  MtnData({super.key, required this.mtnData});
+  Data({super.key, required this.mtnData});
 
   @override
-  State<MtnData> createState() => _MtnDataState();
+  State<Data> createState() => _DataState();
 }
 
-class _MtnDataState extends State<MtnData> {
+class _DataState extends State<Data> {
   TextEditingController phoneController = TextEditingController();
   String variationCode = '';
   int? billersCode = 08011111111;
@@ -35,24 +37,16 @@ class _MtnDataState extends State<MtnData> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Column(children: [
-      BlocBuilder<DataBloc, DataState>(builder: ((context, state) {
-        ServiceData? dataList = state.allNetworks![0];
-        if (state.status == DataStateEnum.success) {
-          return Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: dataList.variations.map((e) {
-              String name = e.name;
-
-              return dataPakage(e.code, e.name);
-            }).toList(),
-          );
-        } else if (state.status == DataStateEnum.socketError) {
-          return Text('error');
-        } else {
-          return Container();
-        }
-      })),
+      const SizedBox(
+        height: 15,
+      ),
+      Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: widget.mtnData!.variations.map((e) {
+          return dataPakage(e);
+        }).toList(),
+      ),
       const SizedBox(
         height: 20,
       ),
@@ -68,13 +62,12 @@ class _MtnDataState extends State<MtnData> {
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton(
-          child: Text('Buy Data'),
           onPressed: () {
             if (phoneController.text.length != 11 &&
                 variationCode.isEmpty &&
                 billersCode != null) {
               context.read<DataBloc>().add(BuyData(
-                  serviceId: 'mtn-data',
+                  serviceId: widget.mtnData!.serviceID,
                   variationCode: variationCode,
                   billersCode: 08011111111,
                   phoneNum: int.parse(phoneController.text)));
@@ -89,13 +82,15 @@ class _MtnDataState extends State<MtnData> {
             foregroundColor: MaterialStateProperty.all<Color>(white),
             backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
           ),
+          child: const Text('Buy Data'),
         ),
       )
     ]));
   }
 
-  Container dataPakage(String price, String dataSize) {
-    List<String> parts = dataSize.split(' ');
+  Container dataPakage(ServiceVariation variation) {
+    double amt = double.parse(variation.amount);
+
     return Container(
       padding: const EdgeInsets.only(bottom: 2, top: 2),
       decoration: BoxDecoration(
@@ -109,23 +104,23 @@ class _MtnDataState extends State<MtnData> {
         child: GestureDetector(
           onTap: () {
             setState(() {
-              variationCode = price;
+              // variationCode = price;
               print(variationCode);
             });
           },
           child: Column(children: [
             Expanded(
                 child: Text(
-              parts[0],
+              'N${amt.toInt()}',
               style: TextStyle(color: black, fontWeight: FontWeight.bold),
             )),
             Text(
-              parts[1],
+              variation.dataAmount,
               style: const TextStyle(
                   color: primaryColor, fontWeight: FontWeight.w600),
             ),
             Text(
-              '${parts[3]} ${parts[4]}',
+              variation.duration,
               style: const TextStyle(color: primaryColor, fontSize: 12),
             )
           ]),

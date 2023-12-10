@@ -12,7 +12,7 @@ class DataRepository {
     return formatter.format(DateTime.now());
   }
 
-  Future<ServiceData?> DataPlans() async {
+  Future<ServiceData?> mtnDataPlans() async {
     String baseUrl =
         'https://sandbox.vtpass.com/api/service-variations?serviceID=mtn-data';
 
@@ -23,6 +23,7 @@ class DataRepository {
     });
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
+
       return ServiceData.fromJson(data['content']);
     } else {
       throw Exception(response.reasonPhrase);
@@ -48,7 +49,7 @@ class DataRepository {
 
   Future<ServiceData?> AirtelDataPlan() async {
     String baseUrl =
-        'https://sandbox.vtpass.com/api/service-variations?serviceID=glo-data';
+        'https://sandbox.vtpass.com/api/service-variations?serviceID=airtel-data';
 
     final response = await http.get(Uri.parse(baseUrl), headers: {
       'Content-Type': 'application/json',

@@ -4,7 +4,6 @@ part of 'data_bloc.dart';
 abstract class DataEvent extends Equatable {}
 
 class FetchDataPlans extends DataEvent {
-  // FetchDataPlans({required this.allNetwork})
   @override
   List<Object?> get props => [];
 }
@@ -26,12 +25,8 @@ class BuyData extends DataEvent {
 
 enum DataStateEnum {
   initial,
-  fetchingData,
-
-  buyingData,
-  error,
   success,
-  socketError
+  error,
 }
 
 //states
@@ -47,16 +42,15 @@ class DataState extends Equatable {
   List<Object?> get props => [
         status,
         error,
+        allNetworks,
       ];
 
   DataState copyWith(
-      {ServiceData? dataPlans,
-      DataStateEnum? status,
-      String? error,
-      List<ServiceData>? allNetworks}) {
+      {DataStateEnum? status, String? error, List<ServiceData>? allNetworks}) {
     return DataState(
       status: status ?? this.status,
       error: error ?? this.error,
+      allNetworks: allNetworks ?? this.allNetworks,
     );
   }
 }

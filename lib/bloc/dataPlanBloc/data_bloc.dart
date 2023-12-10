@@ -14,7 +14,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
   DataBloc({required this.dataRepository}) : super(const DataState()) {
     on<BuyData>((event, emit) async {
-      emit(state.copyWith(status: DataStateEnum.buyingData));
+      emit(state.copyWith(status: DataStateEnum.initial));
 
       try {
         final buydata = await dataRepository.buyMtnData(event.serviceId,
@@ -23,7 +23,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           status: DataStateEnum.success,
         ));
       } on SocketException {
-        emit(state.copyWith(status: DataStateEnum.socketError));
+        emit(state.copyWith(status: DataStateEnum.error));
       } catch (e) {
         emit(state.copyWith(status: DataStateEnum.error, error: state.error));
       }
@@ -31,10 +31,12 @@ class DataBloc extends Bloc<DataEvent, DataState> {
 
     on<FetchDataPlans>(
       (event, emit) async {
-        // emit(state.copyWith(status: DataStateEnum.fetchingData));
+        emit(state.copyWith(status: DataStateEnum.initial));
         try {
-          final mtndata = await dataRepository.DataPlans();
+          final mtndata = await dataRepository.mtnDataPlans();
+
           final airtelData = await dataRepository.AirtelDataPlan();
+
           final gloData = await dataRepository.GloDataPlans();
 
           List<ServiceData> allNetworks = [mtndata!, airtelData!, gloData!];
@@ -42,8 +44,10 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           emit(state.copyWith(
               status: DataStateEnum.success, allNetworks: allNetworks));
         } on SocketException {
-          emit(state.copyWith(status: DataStateEnum.socketError));
+          print('socket error');
+          emit(state.copyWith(status: DataStateEnum.error));
         } catch (e) {
+          print(e);
           emit(state.copyWith(status: DataStateEnum.error, error: state.error));
         }
       },

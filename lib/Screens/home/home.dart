@@ -91,13 +91,9 @@ class _HomePageState extends State<HomePage> {
                             ),
                             IconButton(
                                 onPressed: () {
-//                                   Utils().displayDialog(
-//                                       context,
-//                                       'Your purchase of N500 worth of airtime was sucessful',
-//                                       alertType.fail);
-// /                                  setState(() {
-//                                     isVisible = !isVisible;
-//                                   });
+                                  setState(() {
+                                    isVisible = !isVisible;
+                                  });
                                 },
                                 icon: Icon(
                                   isVisible ? Iconsax.eye : Iconsax.eye_slash,
