@@ -103,15 +103,12 @@ class _DataState extends State<Data> {
             color: white, borderRadius: BorderRadius.circular(20)),
         child: GestureDetector(
           onTap: () {
-            setState(() {
-              // variationCode = price;
-              print(variationCode);
-            });
+            setState(() {});
           },
           child: Column(children: [
             Expanded(
                 child: Text(
-              'N${amt.toInt()}',
+              variation.dataPrice,
               style: TextStyle(color: black, fontWeight: FontWeight.bold),
             )),
             Text(

@@ -30,6 +30,23 @@ class DataRepository {
     }
   }
 
+  Future<ServiceData> etisalatDataPLans() async {
+    String baseUrl =
+        'https://sandbox.vtpass.com/api/service-variations?serviceID=etisalat-data';
+
+    final response = await http.get(Uri.parse(baseUrl), headers: {
+      'Content-Type': 'application/json',
+      'api-key': APIKey,
+      'secret-key': publicKey,
+    });
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      return ServiceData.fromJson(data['content']);
+    } else {
+      throw Exception(response.reasonPhrase);
+    }
+  }
+
   Future<ServiceData?> GloDataPlans() async {
     String baseUrl =
         'https://sandbox.vtpass.com/api/service-variations?serviceID=glo-data';

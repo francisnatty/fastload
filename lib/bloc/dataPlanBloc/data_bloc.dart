@@ -38,8 +38,14 @@ class DataBloc extends Bloc<DataEvent, DataState> {
           final airtelData = await dataRepository.AirtelDataPlan();
 
           final gloData = await dataRepository.GloDataPlans();
+          final etisalatData = await dataRepository.etisalatDataPLans();
 
-          List<ServiceData> allNetworks = [mtndata!, airtelData!, gloData!];
+          List<ServiceData> allNetworks = [
+            mtndata!,
+            airtelData!,
+            gloData!,
+            etisalatData,
+          ];
 
           emit(state.copyWith(
               status: DataStateEnum.success, allNetworks: allNetworks));
