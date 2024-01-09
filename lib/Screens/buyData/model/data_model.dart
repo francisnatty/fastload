@@ -18,7 +18,6 @@ class ServiceVariation {
 
   factory ServiceVariation.fromJson(
       Map<String, dynamic> json, String serviceName) {
-    print(serviceName);
     String dataAmount = '';
     String duration = '';
     String dataPrice = '';
@@ -33,7 +32,8 @@ class ServiceVariation {
     } else if (serviceName == 'Airtel Data') {
       dataPrice = 'N' + json['name'].split(" ")[4];
       dataAmount = json['name'].split(" ")[7];
-      duration = json['name'].split(" ")[9] + ' ' + json['name'].split(" ")[10];
+      duration =
+          ''; //json['name'].split(" ")[9] + ' ' + json['name'].split(" ")[10]
     } else if (serviceName == '9mobile Data') {
       dataPrice = json['name'].split(" ")[3];
       dataAmount = json['name'].split(" ")[5];

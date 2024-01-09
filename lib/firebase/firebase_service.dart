@@ -21,9 +21,9 @@ class FirebaseService {
         print('login sucessful');
       } else {}
     } on SocketException {
-      Utils.showSnackBar(context, 'little of no internet connection');
+      showSnackBar(context, 'little of no internet connection');
     } catch (e) {
-      Utils.showSnackBar(context, '$e');
+      showSnackBar(context, '$e');
     }
   }
 }

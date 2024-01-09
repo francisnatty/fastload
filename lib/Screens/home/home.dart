@@ -9,6 +9,7 @@ import 'package:fastload/constants/variables.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
@@ -42,8 +43,8 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: [
                   SizedBox(
-                      height: 60,
-                      width: 60,
+                      height: 60.h,
+                      width: 60.w,
                       child: CircleAvatar(
                         backgroundImage: Image.asset(Images.userAvatar).image,
                       )),
@@ -65,11 +66,11 @@ class _HomePageState extends State<HomePage> {
               AnimatedContainer(
                 duration: const Duration(seconds: 10),
                 width: screenwidth,
-                height: screenheight * 0.23,
-                padding: const EdgeInsets.fromLTRB(15, 5, 10, 15),
+                height: 250.h,
+                padding: EdgeInsets.fromLTRB(15.w, 5.h, 10.w, 15.h),
                 decoration: BoxDecoration(
                   color: lightBlack,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   gradient:
                       LinearGradient(colors: [black, lightBlack, primaryColor]),
                 ),
@@ -101,8 +102,8 @@ class _HomePageState extends State<HomePage> {
                                 )),
                             const Spacer(),
                             SizedBox(
-                              height: 40,
-                              width: 40,
+                              height: 40.h,
+                              width: 40.w,
                               child: CircleAvatar(
                                 backgroundImage:
                                     Image.asset(Images.naijaFlag).image,
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         SizedBox(
-                          height: screenheight * 0.001,
+                          height: 5.h,
                         ),
                         Text(
                           isVisible ? 'N300000000' : '*****',
@@ -157,11 +158,11 @@ class _HomePageState extends State<HomePage> {
                                         onPressed: () async {
                                           await Clipboard.setData(
                                               ClipboardData(text: acctNumber));
-                                          Utils.showSnackBar(context, 'Copied');
+                                          showSnackBar(context, 'Copied');
                                         },
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Iconsax.copy,
-                                          size: 20,
+                                          size: 20.r,
                                           color: white,
                                         ))
                                   ],
@@ -176,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: screenwidth * 0.01,
+                height: 10.h,
               ),
               const Text(
                 'Pay bills',
@@ -247,7 +248,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.black87, shape: BoxShape.circle),
           child: IconButton(
             onPressed: () {
-              Utils.Navigate(context, newScreen);
+              Navigate(context, newScreen);
             },
             icon: Icon(
               icon,

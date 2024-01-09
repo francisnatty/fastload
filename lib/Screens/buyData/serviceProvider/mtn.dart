@@ -1,21 +1,12 @@
-import 'dart:ffi';
-
 import 'package:fastload/Screens/buyData/model/data_model.dart';
-import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
-import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:fastload/widgets/numTextField.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
-
-import '../../../constants/image.dart';
-import '../components/internet_error_dialog.dart';
 
 class Data extends StatefulWidget {
   final ServiceData? mtnData;
-  Data({super.key, required this.mtnData});
+  const Data({super.key, required this.mtnData});
 
   @override
   State<Data> createState() => _DataState();
@@ -66,13 +57,13 @@ class _DataState extends State<Data> {
             if (phoneController.text.length != 11 &&
                 variationCode.isEmpty &&
                 billersCode != null) {
-              context.read<DataBloc>().add(BuyData(
-                  serviceId: widget.mtnData!.serviceID,
-                  variationCode: variationCode,
-                  billersCode: 08011111111,
-                  phoneNum: int.parse(phoneController.text)));
+              // context.read<DataBloc>().add(BuyData(
+              //     serviceId: widget.mtnData!.serviceID,
+              //     variationCode: variationCode,
+              //     billersCode: 08011111111,
+              //     phoneNum: int.parse(phoneController.text)));
             } else {
-              Utils.showSnackBar(context, 'Input not complete');
+              showSnackBar(context, 'Input not complete');
             }
           },
           style: ButtonStyle(

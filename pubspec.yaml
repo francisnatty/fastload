@@ -53,6 +53,8 @@ dependencies:
   hydrated_bloc: ^9.1.2
   path_provider: ^2.1.1
   shared_preferences: ^2.2.2
+  dio: ^5.4.0
+  dartz: ^0.10.1
  
 
 dev_dependencies:

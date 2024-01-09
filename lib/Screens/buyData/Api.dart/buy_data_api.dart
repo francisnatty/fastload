@@ -29,9 +29,9 @@ class DataAPI {
       final Map<String, dynamic> data = json.decode(response.body);
       return ServiceData.fromJson(data['content']);
     } on SocketException {
-      Utils.showSnackBar(context, 'Little or no Internet Connection');
+      showSnackBar(context, 'Little or no Internet Connection');
     } catch (e) {
-      Utils.showSnackBar(context, '$e');
+      showSnackBar(context, '$e');
       return null;
     }
     return null;
@@ -66,7 +66,7 @@ class DataAPI {
       }
     } catch (e) {
       print(e);
-      Utils.showSnackBar(context, '$e');
+      showSnackBar(context, '$e');
     }
   }
 }

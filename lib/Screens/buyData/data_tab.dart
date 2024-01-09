@@ -1,12 +1,8 @@
-import 'package:fastload/Screens/buyData/model/data_model.dart';
-import 'package:fastload/Screens/buyData/serviceProvider/airtel.dart';
-import 'package:fastload/Screens/buyData/serviceProvider/glo.dart';
 import 'package:fastload/Screens/buyData/serviceProvider/mtn.dart';
-import 'package:fastload/Screens/buyData/serviceProvider/ninemobile.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
-import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
+import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +16,7 @@ class DataTab extends StatefulWidget {
 class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    TabController controller = TabController(length: 3, vsync: this);
+    // TabController controller = TabController(length: 4, vsync: this);
     return Scaffold(
       backgroundColor: greyBack,
       appBar: AppBar(
@@ -36,20 +32,15 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       ),
-      body: BlocProvider(
-        create: (context) =>
-            DataBloc(dataRepository: DataRepository())..add(FetchDataPlans()),
-        child: BlocBuilder<DataBloc, DataState>(
-          builder: (context, state) {
-            // ServiceData? mtn = state.allNetworks![0];
-            if (state.status == DataStateEnum.initial) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state.status == DataStateEnum.error) {
-              return const Center(child: Text('error'));
-            }
-
+      body: BlocBuilder<DataBloc, DataState>(
+        builder: (context, state) {
+          if (state is DataLoading) {
+            return Center(child: showLoadingIndicator());
+          } else if (state is DataError) {
+            return Center(child: Text(state.error));
+          } else if (state is DataLoaded) {
             return DefaultTabController(
-              length: state.allNetworks!.length,
+              length: state.dataPlans.length,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -61,7 +52,7 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(25)),
                       child: TabBar(
                           indicatorSize: TabBarIndicatorSize.tab,
-                          controller: controller,
+                          // controller: controller,
                           labelPadding: const EdgeInsets.all(10),
                           unselectedLabelColor: black,
                           labelStyle: const TextStyle(
@@ -72,10 +63,9 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                           indicator: BoxDecoration(
                               color: primaryColor,
                               borderRadius: BorderRadius.circular(25.0)),
-                          tabs:
-                              List.generate(state.allNetworks!.length, (index) {
+                          tabs: List.generate(state.dataPlans.length, (index) {
                             return Tab(
-                              text: state.allNetworks![index].serviceName
+                              text: state.dataPlans[index].serviceName
                                   .split(" ")
                                   .first,
                             );
@@ -83,10 +73,10 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                     ),
                     Expanded(
                       child: TabBarView(
-                        controller: controller,
+                        // controller: controller,
                         children:
-                            List.generate(state.allNetworks!.length, (index) {
-                          return Data(mtnData: state.allNetworks![index]);
+                            List.generate(state.dataPlans.length, (index) {
+                          return Data(mtnData: state.dataPlans[index]);
                         }),
                       ),
                     ),
@@ -96,8 +86,10 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                 ),
               ),
             );
-          },
-        ),
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
@@ -138,17 +130,17 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                   ]),
             ),
           ),
-          SizedBox(
-            height: double.infinity,
-            child: Flexible(
-              child: TabBarView(controller: controller, children: <Widget>[
-                Container(child: const Text('Natty')),
-                Container(child: const Text('Natty')),
-                Container(child: const Text('Natty')),
-                Container(child: const Text('Natty')),
-              ]),
-            ),
-          )
+          // SizedBox(
+          //   height: double.infinity,
+          //   child: Flexible(
+          //     child: TabBarView(controller: controller, children: <Widget>[
+          //       Container(child: const Text('Natty')),
+          //       Container(child: const Text('Natty')),
+          //       Container(child: const Text('Natty')),
+          //       Container(child: const Text('Natty')),
+          //     ]),
+          //   ),
+          // )
         ],
       ),
     );

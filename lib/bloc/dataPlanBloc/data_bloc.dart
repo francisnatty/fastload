@@ -1,9 +1,8 @@
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
-import 'package:fastload/bloc/dataPlanBloc/mtn_repository.dart';
+import 'package:fastload/bloc/dataPlanBloc/data_repo.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,55 +11,26 @@ part 'data_state.dart';
 class DataBloc extends Bloc<DataEvent, DataState> {
   final DataRepository dataRepository;
 
-  DataBloc({required this.dataRepository}) : super(const DataState()) {
-    on<BuyData>((event, emit) async {
-      emit(state.copyWith(status: DataStateEnum.initial));
+  DataBloc({required this.dataRepository}) : super(DataInitial()) {
+    on<FetchDataPlans>((event, emit) => _fetchDataPlans(event, emit));
+    add(FetchDataPlans());
 
-      try {
-        final buydata = await dataRepository.buyMtnData(event.serviceId,
-            event.variationCode, event.billersCode, event.phoneNum);
-        emit(state.copyWith(
-          status: DataStateEnum.success,
-        ));
-      } on SocketException {
-        emit(state.copyWith(status: DataStateEnum.error));
-      } catch (e) {
-        emit(state.copyWith(status: DataStateEnum.error, error: state.error));
-      }
-    });
-
-    on<FetchDataPlans>(
-      (event, emit) async {
-        emit(state.copyWith(status: DataStateEnum.initial));
-        try {
-          final mtndata = await dataRepository.mtnDataPlans();
-
-          final airtelData = await dataRepository.AirtelDataPlan();
-
-          final gloData = await dataRepository.GloDataPlans();
-          final etisalatData = await dataRepository.etisalatDataPLans();
-
-          List<ServiceData> allNetworks = [
-            mtndata!,
-            airtelData!,
-            gloData!,
-            etisalatData,
-          ];
-
-          emit(state.copyWith(
-              status: DataStateEnum.success, allNetworks: allNetworks));
-        } on SocketException {
-          print('socket error');
-          emit(state.copyWith(status: DataStateEnum.error));
-        } catch (e) {
-          print(e);
-          emit(state.copyWith(status: DataStateEnum.error, error: state.error));
-        }
-      },
-    );
+    on<BuyData>((event, emit) => _buyData(event, emit));
   }
 
-  // void reloadState() {
-  //   emit(DataInitial());
-  // }
+  void _fetchDataPlans(FetchDataPlans event, Emitter<DataState> emit) async {
+    emit(DataLoading());
+    final response = await dataRepository.dataPlans();
+    response.fold((l) => emit(DataError(error: l)),
+        (r) => emit(DataLoaded(dataPlans: r)));
+  }
+
+  void _buyData(BuyData event, Emitter<DataState> emit) async {
+    emit(BuyDataLoading());
+
+    final response = await dataRepository.buyMtnData(event.data);
+
+    response.fold(
+        (l) => emit(BuyDataError(error: l)), (r) => emit(BuyDataSucess()));
+  }
 }

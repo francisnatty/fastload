@@ -82,8 +82,7 @@ class _SignUpState extends State<SignUp> {
                                       email: emailController.text,
                                       password: passController.text));
                             } else {
-                              Utils.showSnackBar(
-                                  context, 'fields cannot be empty');
+                              showSnackBar(context, 'fields cannot be empty');
                             }
                           },
                           style: ButtonStyle(
@@ -98,10 +97,9 @@ class _SignUpState extends State<SignUp> {
                           child: BlocConsumer<AuthBloc, UserRegsitationState>(
                             listener: (context, state) {
                               if (state is UserRegsitationErrorState) {
-                                Utils.showSnackBar(
-                                    context, state.Error.toString());
+                                showSnackBar(context, state.Error.toString());
                               } else if (state is UserRegistrationCodeSent) {
-                                Utils.emailSentDialog(context);
+                                emailSentDialog(context);
                               }
                             },
                             builder: (context, state) {

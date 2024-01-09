@@ -63,7 +63,7 @@ class _PassResetBottomSheetState extends State<PassResetBottomSheet> {
                     child: BlocConsumer<AuthBloc, UserRegsitationState>(
                       listener: (context, state) {
                         if (state is ResetLinkSent) {
-                          Utils.resetLinkSent(context);
+                          resetLinkSent(context);
                         }
                       },
                       builder: (context, state) {

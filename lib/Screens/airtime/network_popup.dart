@@ -3,7 +3,9 @@ import 'package:fastload/constants/image.dart';
 import 'package:flutter/material.dart';
 
 class NetworkPopUp extends StatefulWidget {
+  final void Function(String) onChanged;
   const NetworkPopUp({
+    required this.onChanged,
     super.key,
   });
 
@@ -27,6 +29,7 @@ class _NetworkPopUpState extends State<NetworkPopUp> {
     setState(() {
       initialImage = menuItem.imagePath;
     });
+    widget.onChanged(menuItem.title);
   }
 
   @override
@@ -48,7 +51,6 @@ class _NetworkPopUpState extends State<NetworkPopUp> {
                 return PopupMenuItem<PopupMenuItemModel>(
                     child: GestureDetector(
                   onTap: () {
-                    print(e.title);
                     initialImage = e.imagePath;
                     setState(() {});
                     Navigator.pop(context);

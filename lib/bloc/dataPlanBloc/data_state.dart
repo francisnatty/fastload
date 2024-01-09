@@ -9,81 +9,57 @@ class FetchDataPlans extends DataEvent {
 }
 
 class BuyData extends DataEvent {
-  final String serviceId;
-  final String variationCode;
-  final int billersCode;
-  final int phoneNum;
-  BuyData(
-      {required this.serviceId,
-      required this.variationCode,
-      required this.billersCode,
-      required this.phoneNum});
+  final Map<String, dynamic> data;
+
+  BuyData({required this.data});
 
   @override
-  List<Object?> get props => [serviceId, variationCode, billersCode, phoneNum];
-}
-
-enum DataStateEnum {
-  initial,
-  success,
-  error,
+  List<Object?> get props => [data];
 }
 
 //states
-class DataState extends Equatable {
-  final List<ServiceData>? allNetworks;
-  final DataStateEnum status;
-  final String? error;
+abstract class DataState extends Equatable {}
 
-  const DataState(
-      {this.error, this.status = DataStateEnum.initial, this.allNetworks});
-
+class DataInitial extends DataState {
   @override
-  List<Object?> get props => [
-        status,
-        error,
-        allNetworks,
-      ];
-
-  DataState copyWith(
-      {DataStateEnum? status, String? error, List<ServiceData>? allNetworks}) {
-    return DataState(
-      status: status ?? this.status,
-      error: error ?? this.error,
-      allNetworks: allNetworks ?? this.allNetworks,
-    );
-  }
+  List<Object?> get props => [];
 }
 
-// class DataInitial extends DataState {}
+class DataLoaded extends DataState {
+  List<ServiceData> dataPlans;
 
-// class DataLoaded extends DataState {
-//   ServiceData dataPlans;
+  DataLoaded({required this.dataPlans});
+  @override
+  List<Object?> get props => [dataPlans];
+}
 
-//   DataLoaded({required this.dataPlans});
-// }
+class DataLoading extends DataState {
+  @override
+  List<Object?> get props => [];
+}
 
-// class DataLoading extends DataState {}
+class DataError extends DataState {
+  final String error;
 
-// class DataError extends DataState {
-//   final String error;
+  DataError({required this.error});
 
-//   DataError({required this.error});
+  @override
+  List<Object> get props => [Error];
+}
 
-//   @override
-//   List<Object> get props => [Error];
-// }
+class BuyDataLoading extends DataState {
+  @override
+  List<Object?> get props => [];
+}
 
-// class DataSocketError extends DataState {}
+class BuyDataSucess extends DataState {
+  @override
+  List<Object?> get props => [];
+}
 
-// class BuyDataLoading extends DataState {}
-
-// class BuyDataError extends DataState {
-//   final String error;
-//   BuyDataError({required this.error});
-
-//   @override
-//   List<Object> get props => [error];
-// }
-
-// class BuyDataSocketError extends DataState {}
+class BuyDataError extends DataState {
+  final String error;
+  BuyDataError({required this.error});
+  @override
+  List<Object?> get props => [error];
+}

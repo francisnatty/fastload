@@ -12,7 +12,6 @@ String formateDateTime() {
 class AirtimeAPI {
   static Future<void> purchaseMtnAirtime() async {
     String dateFormat = formateDateTime();
-    print(dateFormat);
 
     try {
       final res = await http.post(Uri.parse(ApiUrl),

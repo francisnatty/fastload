@@ -1,7 +1,12 @@
+import 'package:fastload/Screens/airtime/airtime_API.dart';
 import 'package:fastload/Screens/airtime/network_popup.dart';
 import 'package:fastload/Screens/airtime/prices.dart';
 import 'package:fastload/constants/colors.dart';
+import 'package:fastload/cubit/airtime/airtime_cubit.dart';
+import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AirtimePage extends StatefulWidget {
   const AirtimePage({super.key});
@@ -15,16 +20,14 @@ class _AirtimePageState extends State<AirtimePage> {
   bool _isHovered = false;
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController amtController = TextEditingController();
+  String serviceId = 'mtn';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    //AirtimeAPI.purchaseMtnAirtime();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     phoneNumController;
     amtController;
@@ -36,9 +39,9 @@ class _AirtimePageState extends State<AirtimePage> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: primaryColor,
-          title: const Text(
+          title: Text(
             'Buy Airtime',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp),
           )),
       body: SingleChildScrollView(
         child: Form(
@@ -56,17 +59,18 @@ class _AirtimePageState extends State<AirtimePage> {
               Material(
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey.withOpacity(0.2),
-                child: const Row(children: [
-                  Expanded(
+                child: Row(children: [
+                  const Expanded(
                       child: TextField(
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(15),
                         hintText: 'Select Provider',
                         border: InputBorder.none),
                   )),
-                  NetworkPopUp(),
+                  NetworkPopUp(onChanged: (value) {
+                    serviceId = value;
+                  })
                 ]),
               ),
               const SizedBox(
@@ -82,12 +86,12 @@ class _AirtimePageState extends State<AirtimePage> {
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'No Number';
-                        } else if (text != 11) {
-                          return 'Incorrect number';
-                        }
-                        return null;
+                        // if (text == null || text.isEmpty) {
+                        //   return 'No Number';
+                        // } else if (text != 11) {
+                        //   return 'Incorrect number';
+                        // }
+                        // return null;
                       },
                       controller: phoneNumController,
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -113,6 +117,7 @@ class _AirtimePageState extends State<AirtimePage> {
               ),
               TextFormField(
                 style: const TextStyle(fontWeight: FontWeight.bold),
+                controller: amtController,
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {}
@@ -150,47 +155,54 @@ class _AirtimePageState extends State<AirtimePage> {
               SizedBox(
                 width: width,
                 height: 45,
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  onEnter: (_) {
-                    setState(() {
-                      _isHovered = true;
-                    });
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {});
+
+                    String phone = phoneNumController.text;
+                    String amt = amtController.text;
+                    int? phoneNum = int.tryParse(phone);
+                    int? amtt = int.tryParse(amt);
+                    String dateformat = formateDateTime();
+                    Map<String, dynamic> data = {
+                      'request_id': '202401081014YUs83meikd',
+                      'serviceID': 'mtn',
+                      'amount': 200,
+                      'phone': 08011111111,
+                    };
+
+                    context.read<AirtimeCubit>().buyData(data);
                   },
-                  onHover: (event) {
-                    setState(() {
-                      _isHovered = true;
-                    });
-                  },
-                  onExit: (_) {
-                    setState(() {
-                      _isHovered = false;
-                    });
-                  },
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                      } else {}
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all<Color>(white),
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return Colors.black;
+                        }
+                        return primaryColor;
+                      }),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)))),
+                  child: BlocConsumer<AirtimeCubit, AirtimeState>(
+                    listener: (context, state) {
+                      if (state is BuyAirtimeError) {
+                        showSnackBar(context, state.error);
+                      }
                     },
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(white),
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return Colors.black;
-                          }
-                          return primaryColor;
-                        }),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)))),
-                    child: const Text(
-                      'BUY',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    builder: (context, state) {
+                      if (state is BuyAirtimeLoading) {
+                        return Center(
+                          child: showLoadingIndicator(),
+                        );
+                      } else {
+                        return Text(
+                          'BUY',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),

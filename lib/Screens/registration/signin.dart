@@ -116,10 +116,9 @@ class _SignInState extends State<SignIn> {
                           child: BlocConsumer<AuthBloc, UserRegsitationState>(
                             listener: (context, state) {
                               if (state is UserRegsitationErrorState) {
-                                Utils.showSnackBar(
-                                    context, state.Error.toString());
+                                showSnackBar(context, state.Error.toString());
                               } else if (state is NavigateToHomeScreen) {
-                                Utils.pushAndRemoveScreen(
+                                pushAndRemoveScreen(
                                     context, const HomeScreen());
                               } else if (state is NavigateToSignInScreen) {
                                 Navigator.pushAndRemoveUntil(
@@ -128,7 +127,7 @@ class _SignInState extends State<SignIn> {
                                         builder: (context) => const SignIn()),
                                     (route) => false);
                               } else if (state is UserRegistrationCodeSent) {
-                                Utils.emailSentDialog(context);
+                                emailSentDialog(context);
                               }
                             },
                             builder: (context, state) {
