@@ -1,8 +1,8 @@
 import 'package:fastload/Screens/Electricity/eletricity.dart';
-import 'package:fastload/Screens/TvSub/tv_sub.dart';
 import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
 import 'package:fastload/Screens/buyData/data_tab.dart';
+import 'package:fastload/Screens/tv/tv.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';
 import 'package:fastload/constants/variables.dart';
@@ -194,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                   bills('Electricity', Icons.electric_bolt,
                       const ElectricityPage()),
                   bills('WAEC', Icons.cast_for_education, const AirtimePage()),
-                  bills('Cable Tv', Icons.cast_connected, const TvSub()),
+                  bills('Cable Tv', Icons.cast_connected, const Tv()),
                 ],
               ),
               const Divider(

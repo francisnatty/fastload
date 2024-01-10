@@ -66,7 +66,7 @@ Widget showLoadingIndicator() {
     height: 20.h,
     width: 20.h,
     child: CircularProgressIndicator(
-      color: grey,
+      color: Colors.black,
     ),
   );
 }

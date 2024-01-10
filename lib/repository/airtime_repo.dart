@@ -10,7 +10,7 @@ class AirtimeRepository {
       print('haha');
       final response = await airtimeDataSource.buyAirtime(data);
       if (response.statusCode == 201) {
-        return Right(true);
+        return const Right(true);
       } else {
         return Left(response.statusMessage.toString());
       }

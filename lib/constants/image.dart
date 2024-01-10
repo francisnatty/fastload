@@ -22,4 +22,9 @@ class Images {
 
   static String paybills = 'assets/images/paybills.webp';
   static String bitch = 'assets/images/bitch.JPG';
+
+  static String dstv = 'assets/images/dstv.jpg';
+  static String gotv = 'assets/images/gotv.png';
+  static String showmax = 'assets/images/showmax.png';
+  static String startimes = 'assets/images/startimes.png';
 }

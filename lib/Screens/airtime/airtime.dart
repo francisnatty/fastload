@@ -17,7 +17,7 @@ class AirtimePage extends StatefulWidget {
 
 class _AirtimePageState extends State<AirtimePage> {
   final _formKey = GlobalKey<FormState>();
-  bool _isHovered = false;
+  final bool _isHovered = false;
   TextEditingController phoneNumController = TextEditingController();
   TextEditingController amtController = TextEditingController();
   String serviceId = 'mtn';
@@ -86,6 +86,8 @@ class _AirtimePageState extends State<AirtimePage> {
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       validator: (text) {
+                        return null;
+                      
                         // if (text == null || text.isEmpty) {
                         //   return 'No Number';
                         // } else if (text != 11) {
@@ -197,7 +199,7 @@ class _AirtimePageState extends State<AirtimePage> {
                           child: showLoadingIndicator(),
                         );
                       } else {
-                        return Text(
+                        return const Text(
                           'BUY',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         );

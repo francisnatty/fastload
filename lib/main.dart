@@ -2,13 +2,16 @@ import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_repo.dart';
 import 'package:fastload/bloc/auth/auth_bloc.dart';
 import 'package:fastload/bloc/auth/auth_repo.dart';
+import 'package:fastload/bloc/tv/tv_bloc.dart';
 import 'package:fastload/constants/variables.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/cubit/airtime/airtime_cubit.dart';
 import 'package:fastload/datasource/airtime_datasource.dart';
 import 'package:fastload/datasource/data_datasource.dart';
+import 'package:fastload/datasource/tv_datasource.dart';
 import 'package:fastload/global/global_functions.dart';
 import 'package:fastload/repository/airtime_repo.dart';
+import 'package:fastload/repository/tv_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +44,10 @@ class MyApp extends StatelessWidget {
                   dataRepository:
                       DataRepository(dataDataSource: DataDataSource()))),
           BlocProvider(
-              create: (context) => AuthBloc(authRepository: AuthRepository()))
+              create: (context) => AuthBloc(authRepository: AuthRepository())),
+          BlocProvider(
+              create: (context) => TvBloc(
+                  tvRepository: TvRepository(tvDataSource: TvDataSource())))
         ],
         child: ScreenUtilInit(
           minTextAdapt: true,
