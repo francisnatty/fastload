@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fastload/constants/image.dart';
 
 class TvModel {

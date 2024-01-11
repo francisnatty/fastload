@@ -1,4 +1,4 @@
-import 'package:fastload/cubit/BankAccount/bank_repo.dart';
+import 'package:fastload/repository/bank_repo.dart';
 import 'package:flutter/material.dart';
 
 class PaintApp extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:fastload/Model/tv_model.dart';
+import 'package:fastload/Model/verify_tv_card_model.dart';
 import 'package:fastload/datasource/tv_datasource.dart';
 
 class TvRepository {
@@ -26,6 +27,23 @@ class TvRepository {
         return Right([dstvSubs, gotvSubs, startimeSubs, showmaxSubs]);
       } else {
         return Left(dstvResponse.data);
+      }
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, VerifyCardModel>> verifySmartCard(
+      Map<String, dynamic> data) async {
+    try {
+      final response = await tvDataSource.verifyDstvCard(data);
+      if (response.statusCode == 200) {
+        print(response.data);
+        VerifyCardModel status =
+            VerifyCardModel.fromJson(response.data['content']);
+        return Right(status);
+      } else {
+        return Left(response.data.toString());
       }
     } catch (e) {
       print(e);

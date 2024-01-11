@@ -41,7 +41,7 @@ class _AirtimePageState extends State<AirtimePage> {
           backgroundColor: primaryColor,
           title: Text(
             'Buy Airtime',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.sp),
           )),
       body: SingleChildScrollView(
         child: Form(
@@ -60,9 +60,10 @@ class _AirtimePageState extends State<AirtimePage> {
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey.withOpacity(0.2),
                 child: Row(children: [
-                  const Expanded(
+                  Expanded(
                       child: TextField(
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(15),
                         hintText: 'Select Provider',
@@ -87,7 +88,7 @@ class _AirtimePageState extends State<AirtimePage> {
                       keyboardType: TextInputType.number,
                       validator: (text) {
                         return null;
-                      
+
                         // if (text == null || text.isEmpty) {
                         //   return 'No Number';
                         // } else if (text != 11) {
@@ -102,7 +103,8 @@ class _AirtimePageState extends State<AirtimePage> {
                           fillColor: grey.withOpacity(0.2),
                           border: InputBorder.none,
                           hintText: 'Enter Number',
-                          hintStyle: const TextStyle(fontSize: 13),
+                          hintStyle: TextStyle(
+                              fontSize: 15.sp, fontWeight: FontWeight.bold),
                           contentPadding: const EdgeInsets.all(15),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -131,7 +133,8 @@ class _AirtimePageState extends State<AirtimePage> {
                   border: InputBorder.none,
                   fillColor: Colors.grey.withOpacity(0.2),
                   hintText: 'Amount',
-                  hintStyle: const TextStyle(fontSize: 13),
+                  hintStyle:
+                      TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
@@ -167,11 +170,12 @@ class _AirtimePageState extends State<AirtimePage> {
                     int? amtt = int.tryParse(amt);
                     String dateformat = formateDateTime();
                     Map<String, dynamic> data = {
-                      'request_id': '202401081014YUs83meikd',
+                      'request_id': '${dateformat}s83meikd',
                       'serviceID': 'mtn',
                       'amount': 200,
                       'phone': 08011111111,
                     };
+                    print(dateformat);
 
                     context.read<AirtimeCubit>().buyData(data);
                   },
@@ -199,9 +203,10 @@ class _AirtimePageState extends State<AirtimePage> {
                           child: showLoadingIndicator(),
                         );
                       } else {
-                        return const Text(
+                        return Text(
                           'BUY',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15.sp),
                         );
                       }
                     },

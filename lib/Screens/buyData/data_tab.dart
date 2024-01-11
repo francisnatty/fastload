@@ -5,6 +5,7 @@ import 'package:fastload/constants/image.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DataTab extends StatefulWidget {
   const DataTab({super.key});
@@ -27,9 +28,9 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
+        title: Text(
           'Buy Data',
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17.sp),
         ),
       ),
       body: BlocBuilder<DataBloc, DataState>(
@@ -55,8 +56,9 @@ class _DataTabState extends State<DataTab> with TickerProviderStateMixin {
                           // controller: controller,
                           labelPadding: const EdgeInsets.all(10),
                           unselectedLabelColor: black,
-                          labelStyle: const TextStyle(
+                          labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
+                              fontSize: 16.sp,
                               fontFamily: 'Montserrat'),
                           labelColor: Colors.white,
                           dividerColor: Colors.transparent,

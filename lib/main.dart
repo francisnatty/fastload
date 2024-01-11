@@ -9,6 +9,7 @@ import 'package:fastload/cubit/airtime/airtime_cubit.dart';
 import 'package:fastload/datasource/airtime_datasource.dart';
 import 'package:fastload/datasource/data_datasource.dart';
 import 'package:fastload/datasource/tv_datasource.dart';
+import 'package:fastload/global/global.dart';
 import 'package:fastload/global/global_functions.dart';
 import 'package:fastload/repository/airtime_repo.dart';
 import 'package:fastload/repository/tv_repo.dart';
@@ -19,10 +20,19 @@ import 'firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  Global.init();
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const MyApp());
+}
+
+class MyBlocObserver extends BlocObserver {
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
+  }
 }
 
 class MyApp extends StatelessWidget {

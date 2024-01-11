@@ -7,7 +7,7 @@ class DioHelper {
     Map<String, dynamic> headers = {
       'Content-Type': 'application/json',
       'api-key': APIKey,
-      'secret-key': publicKey,
+      'public-key': publicKey,
     };
 
     return await dio.get(path, options: Options(headers: headers));
@@ -19,7 +19,7 @@ class DioHelper {
     Map<String, dynamic> headers = {
       'Content-Type': 'application/json',
       'api-key': APIKey,
-      'secret-key': publicKey,
+      'secret-key': secretKey,
     };
 
     return await dio.post(path, data: data, options: Options(headers: headers));

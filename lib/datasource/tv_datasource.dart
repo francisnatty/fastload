@@ -28,4 +28,11 @@ class TvDataSource {
 
     return await DioHelper.getData(url);
   }
+
+  Future<Response> verifyDstvCard(Map<String, dynamic> data) async {
+    print(data);
+    String url = 'https://sandbox.vtpass.com/api/merchant-verify';
+
+    return await DioHelper.postData(url, data);
+  }
 }

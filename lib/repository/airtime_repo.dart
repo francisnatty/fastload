@@ -7,8 +7,8 @@ class AirtimeRepository {
 
   Future<Either<String, bool>> buyData(Map<String, dynamic> data) async {
     try {
-      print('haha');
       final response = await airtimeDataSource.buyAirtime(data);
+      print(response.data);
       if (response.statusCode == 201) {
         return const Right(true);
       } else {

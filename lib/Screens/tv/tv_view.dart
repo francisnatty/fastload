@@ -1,7 +1,6 @@
 import 'package:fastload/Model/tv_model.dart';
-import 'package:fastload/constants/image.dart';
+import 'package:fastload/Screens/tv/enter_smartcard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TvView extends StatefulWidget {
@@ -15,11 +14,14 @@ class TvView extends StatefulWidget {
 class _TvViewState extends State<TvView> {
   @override
   Widget build(BuildContext context) {
-    List<Variation> subList = widget.subPlans.variations;
+    TvModel tv = widget.subPlans;
+    List<Variation> subList = tv.variations;
     return ListView.builder(
         shrinkWrap: true,
         itemCount: subList.length,
         itemBuilder: (context, index) {
+          //   final serviceId = tv.serviceID;
+          //  int variationAmount = subList[index].variationAmount;
           return Card(
             elevation: 5.0,
             surfaceTintColor: Colors.white,
@@ -41,7 +43,16 @@ class _TvViewState extends State<TvView> {
                     Icons.arrow_forward_ios,
                     size: 25.r,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TvSmartCard(
+                                  serviceId: tv.serviceID,
+                                  variationAmount: 1850,
+                                  variationCode: subList[index].variationCode,
+                                )));
+                  },
                 )),
           );
         });

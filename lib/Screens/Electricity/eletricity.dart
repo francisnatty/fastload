@@ -1,6 +1,7 @@
 import 'package:fastload/Screens/Electricity/prepaid.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ElectricityPage extends StatefulWidget {
   const ElectricityPage({super.key});
@@ -24,9 +25,9 @@ class _ElectricityPageState extends State<ElectricityPage>
     return Scaffold(
       appBar: AppBar(
           backgroundColor: primaryColor,
-          title: const Text(
+          title: Text(
             'Electricity',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17.sp),
           )),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
@@ -38,7 +39,7 @@ class _ElectricityPageState extends State<ElectricityPage>
                 height: 10,
               ),
               Container(
-                height: 45,
+                height: 45.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     color: Colors.grey.withOpacity(0.3)),

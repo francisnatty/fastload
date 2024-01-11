@@ -3,6 +3,7 @@ import 'package:fastload/constants/colors.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:fastload/widgets/numTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Data extends StatefulWidget {
   final ServiceData? mtnData;
@@ -88,8 +89,8 @@ class _DataState extends State<Data> {
           color: primaryColor, borderRadius: BorderRadius.circular(20)),
       child: Container(
         padding: const EdgeInsets.all(8),
-        height: 80,
-        width: 80,
+        height: 85.h,
+        width: 85.w,
         decoration: BoxDecoration(
             color: white, borderRadius: BorderRadius.circular(20)),
         child: GestureDetector(
@@ -100,16 +101,19 @@ class _DataState extends State<Data> {
             Expanded(
                 child: Text(
               variation.dataPrice,
-              style: TextStyle(color: black, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: black, fontWeight: FontWeight.bold, fontSize: 15.sp),
             )),
             Text(
               variation.dataAmount,
-              style: const TextStyle(
-                  color: primaryColor, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13.sp),
             ),
             Text(
               variation.duration,
-              style: const TextStyle(color: primaryColor, fontSize: 12),
+              style: TextStyle(color: primaryColor, fontSize: 13.sp),
             )
           ]),
         ),

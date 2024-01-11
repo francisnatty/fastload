@@ -1,5 +1,4 @@
 import 'package:fastload/Screens/registration/signup.dart';
-import 'package:fastload/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,8 +64,8 @@ Widget showLoadingIndicator() {
   return SizedBox(
     height: 20.h,
     width: 20.h,
-    child: CircularProgressIndicator(
-      color: Colors.black,
+    child: const CircularProgressIndicator(
+      color: Colors.white,
     ),
   );
 }

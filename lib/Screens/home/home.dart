@@ -61,12 +61,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SizedBox(
-                height: screenheight * 0.02,
+                height: 5.h,
               ),
               AnimatedContainer(
                 duration: const Duration(seconds: 10),
                 width: screenwidth,
-                height: 250.h,
+                height: 239.h,
                 padding: EdgeInsets.fromLTRB(15.w, 5.h, 10.w, 15.h),
                 decoration: BoxDecoration(
                   color: lightBlack,
@@ -134,25 +134,28 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'ACCT NO',
                                   style: TextStyle(
                                       color: white,
+                                      fontSize: 13.sp,
                                       fontWeight: FontWeight.w700),
                                 ),
-                                const Text(
+                                Text(
                                   'Wema Bank',
                                   style: TextStyle(
                                       color: Colors.grey,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Row(
                                   children: [
                                     Text(
                                       acctNumber,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           color: white,
-                                          fontWeight: FontWeight.w500),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 15.sp),
                                     ),
                                     IconButton(
                                         onPressed: () async {
@@ -244,8 +247,12 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         Container(
+          height: 45.h,
+          width: 45.w,
           decoration: const BoxDecoration(
-              color: Colors.black87, shape: BoxShape.circle),
+            color: Colors.black87,
+            shape: BoxShape.circle,
+          ),
           child: IconButton(
             onPressed: () {
               Navigate(context, newScreen);
@@ -253,6 +260,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(
               icon,
               color: white,
+              size: 25.r,
             ),
           ),
         ),
