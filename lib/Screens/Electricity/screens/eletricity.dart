@@ -1,4 +1,5 @@
-import 'package:fastload/Screens/Electricity/prepaid.dart';
+import 'package:fastload/Screens/Electricity/widgets/postpaid.dart';
+import 'package:fastload/Screens/Electricity/widgets/prepaid.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,9 +15,7 @@ class _ElectricityPageState extends State<ElectricityPage>
     with TickerProviderStateMixin {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // ElectricityApi().validateMeterNumber();
   }
 
   @override
@@ -69,8 +68,8 @@ class _ElectricityPageState extends State<ElectricityPage>
                   child: TabBarView(
                 controller: tabController,
                 children: const [
-                  PrepaidPage(),
-                  Text('Natty'),
+                  PrepaidPage(serviceType: 'prepaid'),
+                  PostPaid(serviceType: 'postpaid'),
                 ],
               ))
               // SuccessDialog(),

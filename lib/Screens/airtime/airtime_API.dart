@@ -14,7 +14,7 @@ class AirtimeAPI {
     String dateFormat = formateDateTime();
 
     try {
-      final res = await http.post(Uri.parse(ApiUrl),
+      final res = await http.post(Uri.parse(apiUrl),
           body: jsonEncode(<String, dynamic>{
             'request_id': '$dateFormat}YUs83meikd',
             'serviceID': 'mtn',

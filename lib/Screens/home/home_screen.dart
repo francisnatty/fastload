@@ -1,7 +1,9 @@
+import 'package:fastload/Screens/Electricity/screens/eletricity.dart';
 import 'package:fastload/Screens/home/home.dart';
 import 'package:fastload/Screens/settings/settings.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/Screens/pin/pin_screen.dart';
+import 'package:fastload/try.dart';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -18,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<Widget> screens = [
     // const HomePage(),
-    const HomePage(),
-    const PinScreen(),
+    const ElectricityPage(),
+    const Try(),
     const Center(
       child: Text('Third screen'),
     ),

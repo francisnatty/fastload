@@ -10,11 +10,12 @@ class FetchDataPlans extends DataEvent {
 
 class BuyData extends DataEvent {
   final Map<String, dynamic> data;
+  final BuildContext context;
 
-  BuyData({required this.data});
+  BuyData({required this.data, required this.context});
 
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => [data, context];
 }
 
 //states
@@ -62,4 +63,9 @@ class BuyDataError extends DataState {
   BuyDataError({required this.error});
   @override
   List<Object?> get props => [error];
+}
+
+class BuyDataReset extends DataState {
+  @override
+  List<Object?> get props => [];
 }

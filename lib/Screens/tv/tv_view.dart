@@ -20,8 +20,8 @@ class _TvViewState extends State<TvView> {
         shrinkWrap: true,
         itemCount: subList.length,
         itemBuilder: (context, index) {
-          //   final serviceId = tv.serviceID;
-          //  int variationAmount = subList[index].variationAmount;
+          String amt = subList[index].variationAmount;
+          // int? variationAmount = int.tryParse(amt);
           return Card(
             elevation: 5.0,
             surfaceTintColor: Colors.white,

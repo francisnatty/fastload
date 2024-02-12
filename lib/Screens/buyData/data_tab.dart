@@ -1,4 +1,4 @@
-import 'package:fastload/Screens/buyData/serviceProvider/mtn.dart';
+import 'package:fastload/Screens/buyData/serviceProvider/data.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/constants/image.dart';

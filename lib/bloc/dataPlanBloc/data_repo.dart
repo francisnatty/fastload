@@ -1,7 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/datasource/data_datasource.dart';
+import 'package:fastload/utils/api/api_response.dart';
+import 'package:fastload/utils/api/list_response.dart';
 
 class DataRepository {
   DataRepository({required this.dataDataSource});
@@ -43,6 +46,7 @@ class DataRepository {
   Future<Either<String, bool>> buyMtnData(Map<String, dynamic> data) async {
     try {
       final response = await dataDataSource.purchaseData(data);
+      print(response.data);
 
       if (response.statusCode == 200) {
         return const Right(true);
@@ -55,8 +59,24 @@ class DataRepository {
   }
 }
 
-//  'request_id': dateFormat,
-//             'serviceID': serviceId,
-//             'billersCode': billersCode,
-//             'variation_code': variationCode,
-//             'phone': phone,
+abstract class RemoteDataSource {
+  Future<ApiResponse<ListResponse<ServiceData>>> getMovies();
+  // Future<ApiResponse<g>>
+}
+
+class RemoteDataSourceImpl implements RemoteDataSource {
+  final ApiClient apiClient;
+  RemoteDataSourceImpl({
+    required this.apiClient,
+  });
+
+  @override
+  Future<ApiResponse<ListResponse<ServiceData>>> getMovies() {
+    return apiClient.request(
+      path: '/service-variations?serviceID=airtel-data',
+      method: MethodType.get,
+      fromJson: (json) => ListResponse.fromJson(
+          json, (json) => ServiceData.fromJson(json as Map<String, dynamic>)),
+    );
+  }
+}

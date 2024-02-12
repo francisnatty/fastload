@@ -1,6 +1,6 @@
 import 'package:fastload/Screens/airtime/airtime_API.dart';
 import 'package:fastload/Screens/airtime/network_popup.dart';
-import 'package:fastload/Screens/airtime/prices.dart';
+import 'package:fastload/Screens/airtime/widget/prices.dart';
 import 'package:fastload/constants/colors.dart';
 import 'package:fastload/cubit/airtime/airtime_cubit.dart';
 import 'package:fastload/utils/utils.dart';

@@ -1,5 +1,6 @@
 import 'package:fastload/bloc/tv/tv_bloc.dart';
 import 'package:fastload/constants/colors.dart';
+import 'package:fastload/global/global_variables.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +10,7 @@ import 'package:iconsax/iconsax.dart';
 
 class TvSmartCard extends StatefulWidget {
   final String variationCode;
-  final double variationAmount;
+  final int variationAmount;
   final String serviceId;
   const TvSmartCard(
       {required this.serviceId,
@@ -25,7 +26,6 @@ class _TvSmartCardState extends State<TvSmartCard> {
   TextEditingController cardNum = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
     cardNum.dispose();
     super.dispose();
   }
@@ -49,7 +49,13 @@ class _TvSmartCardState extends State<TvSmartCard> {
           mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Enter SmartCard Num'),
+            Text(
+              'Verify your SmartCard',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontSize: 20.h),
+            ),
             TextField(
               controller: cardNum,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.sp),
@@ -140,7 +146,19 @@ class _TvSmartCardState extends State<TvSmartCard> {
                           MaterialStateProperty.all<Color>(primaryColor),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(Colors.white)),
-                  onPressed: () {},
+                  onPressed: () {
+                    String dateFormat = formateDateTime();
+                    //bounquet change
+                    Map<String, dynamic> changeBonguet = {
+                      'request_id': '${dateFormat}ppp',
+                      'serviceID': widget.serviceId,
+                      'billersCode': cardNum.text,
+                      'variation_code': widget.variationCode,
+                      'amount': widget.variationAmount,
+                      'phone': 09022901746,
+                      'subscription_type': 'change'
+                    };
+                  },
                   child: Text(
                     'Proceed',
                     style:

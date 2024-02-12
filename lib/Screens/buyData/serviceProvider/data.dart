@@ -1,8 +1,11 @@
 import 'package:fastload/Screens/buyData/model/data_model.dart';
+import 'package:fastload/bloc/dataPlanBloc/data_bloc.dart';
 import 'package:fastload/constants/colors.dart';
+import 'package:fastload/global/global_variables.dart';
 import 'package:fastload/utils/utils.dart';
 import 'package:fastload/widgets/numTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Data extends StatefulWidget {
@@ -16,14 +19,9 @@ class Data extends StatefulWidget {
 class _DataState extends State<Data> {
   TextEditingController phoneController = TextEditingController();
   String variationCode = '';
-  int? billersCode = 08011111111;
+  String billersCode = '08011111111';
   int? phoneNum;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +33,13 @@ class _DataState extends State<Data> {
       Wrap(
         spacing: 10,
         runSpacing: 10,
-        children: widget.mtnData!.variations.map((e) {
-          return dataPakage(e);
-        }).toList(),
+        // children: widget.mtnData!.variations.map((e) {
+
+        //   return dataPakage(e);
+        // }).toList(),
+        children: List.generate(widget.mtnData!.variations.length, (index) {
+          return dataPakage(widget.mtnData!.variations[index], index);
+        }),
       ),
       const SizedBox(
         height: 20,
@@ -55,17 +57,17 @@ class _DataState extends State<Data> {
         height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton(
           onPressed: () {
-            if (phoneController.text.length != 11 &&
-                variationCode.isEmpty &&
-                billersCode != null) {
-              // context.read<DataBloc>().add(BuyData(
-              //     serviceId: widget.mtnData!.serviceID,
-              //     variationCode: variationCode,
-              //     billersCode: 08011111111,
-              //     phoneNum: int.parse(phoneController.text)));
-            } else {
-              showSnackBar(context, 'Input not complete');
-            }
+            String dateFormat = formateDateTime();
+            Map<String, dynamic> dataDetails = {
+              'request_id': '${dateFormat}natty',
+              'serviceID': widget.mtnData!.serviceID,
+              'billersCode': billersCode,
+              'variation_code': variationCode,
+              'phone': 09022901746,
+            };
+            context
+                .read<DataBloc>()
+                .add(BuyData(data: dataDetails, context: context));
           },
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -74,13 +76,16 @@ class _DataState extends State<Data> {
             foregroundColor: MaterialStateProperty.all<Color>(white),
             backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
           ),
-          child: const Text('Buy Data'),
+          child: const Text(
+            'Buy Data',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
       )
     ]));
   }
 
-  Container dataPakage(ServiceVariation variation) {
+  Container dataPakage(ServiceVariation variation, int index) {
     double amt = double.parse(variation.amount);
 
     return Container(
@@ -92,17 +97,23 @@ class _DataState extends State<Data> {
         height: 85.h,
         width: 85.w,
         decoration: BoxDecoration(
-            color: white, borderRadius: BorderRadius.circular(20)),
+            color: selectedIndex == index ? Colors.black87 : white,
+            borderRadius: BorderRadius.circular(20)),
         child: GestureDetector(
           onTap: () {
-            setState(() {});
+            setState(() {
+              variationCode = variation.code;
+              selectedIndex = index;
+            });
           },
           child: Column(children: [
             Expanded(
                 child: Text(
               variation.dataPrice,
               style: TextStyle(
-                  color: black, fontWeight: FontWeight.bold, fontSize: 15.sp),
+                  color: selectedIndex == index ? white : black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15.sp),
             )),
             Text(
               variation.dataAmount,

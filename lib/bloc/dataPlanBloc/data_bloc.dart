@@ -1,8 +1,9 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fastload/Screens/buyData/model/data_model.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_repo.dart';
+import 'package:fastload/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,11 +27,13 @@ class DataBloc extends Bloc<DataEvent, DataState> {
   }
 
   void _buyData(BuyData event, Emitter<DataState> emit) async {
-    emit(BuyDataLoading());
+    fullScreeenLoading(event.context);
 
     final response = await dataRepository.buyMtnData(event.data);
 
-    response.fold(
-        (l) => emit(BuyDataError(error: l)), (r) => emit(BuyDataSucess()));
+    Navigator.of(event.context).pop();
+
+    response.fold((l) => showSnackBar(event.context, l),
+        (r) => showSnackBar(event.context, 'successful'));
   }
 }

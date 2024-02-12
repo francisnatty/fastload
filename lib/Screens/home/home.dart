@@ -1,4 +1,4 @@
-import 'package:fastload/Screens/Electricity/eletricity.dart';
+import 'package:fastload/Screens/Electricity/screens/eletricity.dart';
 import 'package:fastload/Screens/airtime/airtime.dart';
 import 'package:fastload/Screens/home/transactions.dart';
 import 'package:fastload/Screens/buyData/data_tab.dart';
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text(
+                            Text(
                               'Your balance',
                               style: textStyle,
                             ),
@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.w500),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15.sp),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/colors.dart';
 
@@ -20,17 +21,20 @@ class Transactions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.max,
           children: [
-            const Row(
+            Row(
               children: [
                 Text(
                   'Last Transactions',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   'See All',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.green),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                      fontSize: 13.sp),
                 )
               ],
             ),
@@ -56,18 +60,19 @@ class Transactions extends StatelessWidget {
                           ),
                         ),
                       ),
-                      title: const Text(
+                      title: Text(
                         'Airtime',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 16.sp),
                       ),
                       subtitle: const Text('purchased airtime'),
-                      trailing: const Column(
+                      trailing: Column(
                         children: [
                           Text(
                             'N100',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 14.sp,
                                 color: Colors.red),
                           ),
                           Text('10/20/2023'),

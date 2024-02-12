@@ -26,6 +26,28 @@ Navigate(BuildContext context, Widget newScreen) {
       .push(MaterialPageRoute(builder: (context) => newScreen));
 }
 
+Future<dynamic> fullScreeenLoading(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return Container(
+          color: Colors.white.withOpacity(0.6),
+          height: ScreenUtil().screenHeight,
+          width: ScreenUtil().screenWidth,
+          child: Center(
+            child: SizedBox(
+              height: 25.h,
+              width: 25.w,
+              child: const CircularProgressIndicator(
+                color: Colors.black,
+                strokeWidth: 3.0,
+              ),
+            ),
+          ),
+        );
+      });
+}
+
 resetLinkSent(BuildContext context) {
   return showDialog(
       context: context,

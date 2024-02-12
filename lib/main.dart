@@ -1,3 +1,6 @@
+import 'package:fastload/Screens/Electricity/bloc/electricity_bloc.dart';
+import 'package:fastload/Screens/Electricity/data/electricity_dataSource.dart';
+import 'package:fastload/Screens/Electricity/data/electricity_repo.dart';
 import 'package:fastload/Screens/home/home_screen.dart';
 import 'package:fastload/bloc/dataPlanBloc/data_repo.dart';
 import 'package:fastload/bloc/auth/auth_bloc.dart';
@@ -57,7 +60,11 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthBloc(authRepository: AuthRepository())),
           BlocProvider(
               create: (context) => TvBloc(
-                  tvRepository: TvRepository(tvDataSource: TvDataSource())))
+                  tvRepository: TvRepository(tvDataSource: TvDataSource()))),
+          BlocProvider(
+              create: (context) => ElectricityBloc(
+                  electricityRepository: ElectricityRepository(
+                      electricityDataSource: ElectricityDataSource())))
         ],
         child: ScreenUtilInit(
           minTextAdapt: true,
@@ -68,7 +75,14 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               scaffoldMessengerKey: snackbarKey,
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.deepPurple,
+                  brightness: Brightness.light,
+                ),
+                textTheme: TextTheme(
+                    displayLarge:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
+                    bodySmall: TextStyle(fontSize: 15.sp)),
                 fontFamily: fontName,
                 useMaterial3: true,
               ),
